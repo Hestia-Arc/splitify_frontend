@@ -1,0 +1,1 @@
+export const sectionLayout = "min-h-40 m-4 sm:m-8 ";
