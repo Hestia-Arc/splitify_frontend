@@ -1,9 +1,10 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Overview from "./components/dashboard/Overview";
-import Expense from "./components/dashboard/Expense";
 import Friends from "./components/dashboard/Friends";
+import AddFriend from "./components/dashboard/AddFriend";
 import Groups from "./components/dashboard/Groups";
+import AddGroup from "./components/dashboard/AddGroup";
 import Setting from "./components/dashboard/Setting";
 import LandingPage from "./pages/LandingPage";
 import SignUp from "./pages/SignUp";
@@ -15,14 +16,14 @@ import PageNotFound from "./pages/PageNotFound";
 const App = () => {
   return (
     <div className="h-screen font-lato  min-w-[375px] max-w-[767px] sm:min-w-[768px] sm:max-w-[1023px] lg:mx-auto lg:min-w-[1300px] lg:max-w-[1440px] ">
-          {/* <div className="h-screen mx-auto xs:min-w-[374px] xs:max-w-[375px] sm:mx-auto lg:min-w-[1300px] lg:max-w-[1440px]"> */}
+      {/* <div className="h-screen mx-auto xs:min-w-[374px] xs:max-w-[375px] sm:mx-auto lg:min-w-[1300px] lg:max-w-[1440px]"> */}
 
       <Routes>
         {/* ================== PUBLIC ROUTES */}
         <Route path="/" element={<LandingPage />} />
         <Route path="signup" element={<SignUp />} />
         <Route path="login" element={<Login />} />
-        <Route path="*" element={<PageNotFound/>} />
+        <Route path="*" element={<PageNotFound />} />
 
         {/* <Route path="passreset" element={<PassReset />} /> */}
         {/* <Route path="newpassword" element={<NewPassword />} /> */}
@@ -31,9 +32,10 @@ const App = () => {
         <Route element={<ProtectedRoute />}>
           <Route path="/dashboard" element={<Dashboard />}>
             <Route index element={<Overview />} />
-            <Route path="expense" element={<Expense />} />
             <Route path="friends" element={<Friends />} />
+            <Route path="friends/addfriend" element={<AddFriend />} />
             <Route path="groups" element={<Groups />} />
+            <Route path="groups/addgroup" element={<AddGroup />} />
             <Route path="setting" element={<Setting />} />
           </Route>
         </Route>

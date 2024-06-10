@@ -11,7 +11,7 @@ export default {
         sm: "768px",
         md: "1024px",
         lg: "1300px",
-        xl: "1400px"
+        xl: "1400px",
         // 'sm': {'min': '0px', 'max': '480px'},
         // 'md': {"max": '750px'},
         // 'lg': {'min': '480px', 'max': '880px'},
@@ -22,6 +22,8 @@ export default {
         "primary-50": "#ffe4f7",
         "primary-100": "#B70569",
         "cool-white-100": "#f8f7f7",
+         "red": "#F01F1F",
+         "green":"#63B800"
       },
       fontSize: {
         title: [
@@ -45,7 +47,7 @@ export default {
         //   "32px",
         //   { lineHeight: "38px", letterSpacing: "0px", fontWeight: 500 },
         // ],
-      }
+      },
     },
   },
   plugins: [],

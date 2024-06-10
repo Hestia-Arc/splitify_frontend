@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FaPowerOff, FaWallet, FaUserFriends } from "react-icons/fa";
+import { FaPowerOff, FaUserFriends } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import {
   MdDashboard,
@@ -15,11 +15,7 @@ const Sidebar = () => {
       path: "./",
       icon: <MdDashboard className="w-8 h-8" />,
     },
-    {
-      name: "Expense",
-      path: "expense",
-      icon: <FaWallet className="w-8 h-8" />,
-    },
+
     {
       name: "Friends",
       path: "friends",
@@ -65,7 +61,9 @@ const Sidebar = () => {
       <div className=" h-[450px] flex flex-col gap-4 mt-10">
         {menuItem.map((item, index) => (
           <Link
-            className={`h-[48px] flex items-center ${isOpen ? "justify-start" : "justify-center"}  gap-4 hover:bg-primary-50 hover:p-1 hover:font-extrabold rounded-md `}
+            className={`h-[48px] flex items-center ${
+              isOpen ? "justify-start" : "justify-center"
+            }  gap-4 hover:bg-primary-50 hover:p-1 hover:font-extrabold rounded-md `}
             key={index}
             to={item.path}
             // onClick={toggleIsOpen}
@@ -85,7 +83,9 @@ const Sidebar = () => {
       </div>
       {/* ==================== LOGOUT */}
       <div
-        className={` h-[48px] flex items-center  ${isOpen ? "justify-start" : "justify-center"}  gap-4 mb-4 hover:bg-primary-50 
+        className={` h-[48px] flex items-center  ${
+          isOpen ? "justify-start" : "justify-center"
+        }  gap-4 mb-4 hover:bg-primary-50 
              rounded-md `}
       >
         <div className="text-primary-100 flex items-center justify-center hover:text-white p-1  rounded-md  hover:bg-primary-100 ">
