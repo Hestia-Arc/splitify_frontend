@@ -21,7 +21,7 @@ export const ButtonDark = (props) => {
 
 export const ButtonPrimary = ({text, style}) => {
   return (
-    <button className={`h-[48px] w-full ${style}  flex justify-center items-center font-semibold rounded`}>
+    <button className={`h-[48px] ${style}  flex justify-center items-center font-semibold rounded`}>
     <p className="">{text}</p>
     </button>
   )
