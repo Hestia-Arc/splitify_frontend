@@ -1,18 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "./../context/authContext";
+import logo from "../assets/images/split-logo.png";
+import groupImage from "../assets/images/authImage.png";
+import { ButtonPrimary } from "../components/elements/Button";
+
+const inputStyle =
+  "h-9 border text-[16px] bg-transparent px-2 py-1 border-[#B70569] rounded";
+const labelStyle = "text-[16px] mb-1";
 
 // ================================================
 
 // ===================================================
 function Login() {
-
   const navigate = useNavigate();
   const { loginHandler } = useAuth();
 
   //
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
 
   //
   const [showPassword, setShowPassword] = useState(false);
@@ -22,11 +30,11 @@ function Login() {
   const [errorRegex, setErrorRegex] = useState(false);
   const [errorAlert, setErrorAlert] = useState("");
 
-  const checkFields = email !== "" && password !== "";
+  // const checkFields = email !== "" && password !== "";
 
-  useEffect(() => {
-    setErrorRegex("");
-  }, [email, password]);
+  // useEffect(() => {
+  //   setErrorRegex("");
+  // }, [email, password]);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -80,196 +88,82 @@ function Login() {
     event.preventDefault();
   };
 
+  const inputChange = () => {};
+
   return (
-    <div className="flex item-center justify-center text-[40px]">Login</div>
-    // <ContentBox color={colors.surface[500]}>
-    //   <GridBox direction="row" spacing={4} color={colors.surface[400]}>
-    //     <LogoBox />
+    <div className="h-screen w-full flex bg-cool-white-100 overflow-y-auto  ">
+      {/* -------------------------- left */}
+      <div className=" h-fit flex-1 bg-[#D977AF] p-1 sm:p-0 ">
+        {/* logo */}
+        <div className="w-full flex justify-center p-2">
+          <img
+            src={logo}
+            className="h-[100px] w-[100px]"
+            alt="group with phone"
+          />
+        </div>
 
-    //     <FormBox justifyContent="center" spacing={3} color={colors.text[88]}>
-    //       <Box>
-    //         <TitleBox color={colors.text[88]}>Log into your account</TitleBox>
-    //         <Box>
-    //           <TitleTag component="span" color={colors.greenAccent[500]}>
-    //             {" "}
-    //             Don't have an account?{" "}
-    //             <Link
-    //               to="../signup"
-    //               style={{ fontSize: "0.8rem", textDecoration: "none" }}
-    //             >
-    //               {" "}
-    //               <Typography
-    //                 sx={{
-    //                   display: "inline",
-    //                   fontSize: "0.8rem",
-    //                   color: theme.palette.info.main,
-    //                 }}
-    //               >
-    //                 Sign Up
-    //               </Typography>
-    //             </Link>{" "}
-    //             instead{" "}
-    //           </TitleTag>
-    //         </Box>
-    //       </Box>
+        {/* form */}
+        <div className=" bg-cool-white-100 h-[79%] flex flex-col items-center  rounded-t-[30px] sm:rounded-tl-[80px] sm:rounded-tr-[0px] rou mt-2 py-4 pb-10 sm:py-8  ">
+          <div className="text-subTitle font-bold ">Welcome Back!</div>
 
-    //       <form onSubmit={submitHandler}>
-    //         <Stack spacing={1.7}>
-    //           {/* =================== EMAIL================== */}
-    //           <InputContainer error={error} variant="standard">
-    //             <LabelBox htmlFor="email" color={colors.text[48]}>
-    //               Email
-    //             </LabelBox>
+          <form action="" className="w-4/5 sm:w-3/5 flex flex-col gap-4 mt-8 ">
+            {/* ----- 1 */}
+            <div className="flex flex-col">
+              <label className={labelStyle} htmlFor="email">
+                Email
+              </label>
+              <input
+                type="email"
+                name="email"
+                id="email"
+                placeholder="Email"
+                className={inputStyle}
+                value={formData.email}
+                onChange={inputChange}
+              />
+            </div>
 
-    //             <Tooltip
-    //               TransitionComponent={Fade}
-    //               TransitionProps={{ timeout: 500 }}
-    //               title={
-    //                 <>
-    //                   {errorRegex && (
-    //                     <Typography
-    //                       sx={{
-    //                         fontSize: "0.7rem",
-    //                         color: theme.palette.secondary.main,
-    //                       }}
-    //                     >
-    //                       Invalid entry
-    //                     </Typography>
-    //                   )}
-    //                   <Typography sx={{ fontSize: "0.7rem" }}>
-    //                     <InfoRoundedIcon
-    //                       color="info"
-    //                       sx={{ fontSize: "18px" }}
-    //                     />{" "}
-    //                     example@gmail.com
-    //                   </Typography>
-    //                 </>
-    //               }
-    //               arrow
-    //             >
-    //               <InputBox
-    //                 id="email"
-    //                 size="small"
-    //                 type="email"
-    //                 value={email}
-    //                 onChange={(e) => setEmail(e.target.value)}
-    //                 required
-    //                 error={errorRegex}
-    //                 aria-describedby="component-error-text"
-    //               />
-    //             </Tooltip>
-    //           </InputContainer>
+            {/* ------- 3 */}
+            <div className="flex flex-col">
+              <label className={labelStyle} htmlFor="password">
+                Password
+              </label>
+              <input
+                type="password"
+                name="password"
+                id="password"
+                placeholder="Password"
+                className={inputStyle}
+                value={formData.password}
+                onChange={inputChange}
+              />
+            </div>
 
-    //           {/* =================== PASSWORD================== */}
-    //           <InputContainer variant="standard" sx={{ width: "100%" }}>
-    //             <LabelBox htmlFor="password" color={colors.text[48]}>
-    //               Password
-    //             </LabelBox>
-    //             <Tooltip
-    //               TransitionComponent={Fade}
-    //               TransitionProps={{ timeout: 500 }}
-    //               title={
-    //                 <>
-    //                   {errorRegex && (
-    //                     <Typography
-    //                       sx={{
-    //                         fontSize: "0.7rem",
-    //                         color: theme.palette.secondary.main,
-    //                       }}
-    //                     >
-    //                       Invalid entry
-    //                     </Typography>
-    //                   )}
-    //                   <Typography sx={{ fontSize: "0.7rem" }}>
-    //                     <InfoRoundedIcon
-    //                       color="info"
-    //                       sx={{ fontSize: "18px" }}
-    //                     />{" "}
-    //                     Must be atleast 8 characters.
-    //                     <br />
-    //                     Must include uppercase and lowercase letters, a number
-    //                     and a special character.
-    //                   </Typography>
-    //                 </>
-    //               }
-    //               arrow
-    //             >
-    //               <InputBox
-    //                 id="Password"
-    //                 size="small"
-    //                 type={showPassword ? "text" : "password"}
-    //                 value={password}
-    //                 onChange={(e) => setPassword(e.target.value)}
-    //                 required
-    //                 error={errorRegex}
-    //                 aria-describedby="component-error-text"
-    //                 endAdornment={
-    //                   <InputAdornment position="end">
-    //                     <IconButton
-    //                       aria-label="toggle password visibility"
-    //                       onClick={handleClickShowPassword}
-    //                       onMouseDown={handleMouseDownPassword}
-    //                       // edge="end"
-    //                     >
-    //                       {showPassword ? (
-    //                         <Visibility sx={{ fontSize: "14px" }} />
-    //                       ) : (
-    //                         <VisibilityOff sx={{ fontSize: "14px" }} />
-    //                       )}
-    //                     </IconButton>
-    //                   </InputAdornment>
-    //                 }
-    //               />
-    //             </Tooltip>
+            {/* ------ btn */}
 
-    //             <ForgotBox>
-    //               <Link to="../passreset" className="link-color">
-    //                 Forgot Password?
-    //               </Link>
-    //             </ForgotBox>
-    //             <FormHelperText
-    //               id="component-error-text"
-    //               sx={{ display: error ? "block" : "none" }}
-    //             >
-    //               Incorrect entry.
-    //             </FormHelperText>
-    //           </InputContainer>
+            <ButtonPrimary
+              text="Log In"
+              style="bg-[#B70569] text-cool-white-100 w-full"
+            />
+          </form>
+          <div>
+            <div className="text-[14px] text-[#777] mt-2">
+              Don't have an account? <span className="text-[#B70569] font-bold ml-1">Create Account</span>
+            </div>
+          </div>
+        </div>
+      </div>
 
-    //           {/* =================SUBMIT========== */}
-    //           <div>
-    //             <ButtonBox
-    //               type="submit"
-    //               variant="contained"
-    //               disabled={!checkFields}
-    //             >
-    //               Log in
-    //             </ButtonBox>
-
-    //             {loading ? <LinearProgress color="success" /> : ""}
-
-    //             {errorAlert && (
-    //               <Stack direction="row" alignItems="center" spacing={1} mt={1}>
-    //                 <ErrorOutlineRoundedIcon
-    //                   color="error"
-    //                   sx={{ fontSize: "18px" }}
-    //                 />
-    //                 <Typography sx={{ fontSize: "0.7rem" }}>
-    //                   {errorAlert}
-    //                 </Typography>
-    //               </Stack>
-    //             )}
-    //           </div>
-    //         </Stack>
-    //       </form>
-
-    //       {/* ==================== OTHERS================ */}
-    //       <Stack alignItems="center" spacing={1}>
-    //         <StyledText>or continue using</StyledText>
-    //         <AuthBox />
-    //       </Stack>
-    //     </FormBox>
-    //   </GridBox>
-    // </ContentBox>
+      {/* ------------------------------ right */}
+      <div className=" hidden sm:flex w-2/5  justify-end ">
+        <img
+          src={groupImage}
+          className="h-[642px] w-[590px]"
+          alt="group with phone"
+        />
+      </div>
+    </div>
   );
 }
 

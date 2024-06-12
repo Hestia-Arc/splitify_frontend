@@ -1,54 +1,15 @@
-// import React from "react";
-// import { sectionLayout } from "../../utils/sections";
-// import { FaPlus } from "react-icons/fa6";
-// import { Link } from "react-router-dom";
-
-// const Friends = () => {
-//   const friendArray = [
-//     { img: "", name: "Rohimat" },
-//     { img: "", name: "ife" },
-//     { img: "", name: "john" },
-//     { img: "", name: "jamiu" },
-//   ];
-//   return (
-//     <div className={sectionLayout}>
-//       <div className="flex flex-row-reverse items-start">
-//         <Link to="addfriend">
-//           <button
-//             type="button"
-//             className=" text-cool-white-100 bg-primary-100 border py-3 px-5 sm:p-1 flex  items-center  gap-1 rounded-md "
-//           >
-//             <FaPlus /> Add Friend
-//           </button>
-//         </Link>
-//         <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-10 mt-20 text-[40px]">
-//           {friendArray.map((friend, index) => (
-//             <div
-//               key={index}
-//               className="flex flex-col items-center justify-center"
-//             >
-//               <div className="h-[150px] w-[150px] rounded-full bg-gray-500 border-none">
-//                 {friend.img}
-//               </div>
-//               <p className="text-center">{friend.name}</p>
-//             </div>
-//           ))}
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Friends;
 import React, { useState, useEffect } from "react";
 import { sectionLayout } from "../../utils/sections";
-import { FaPlus, } from "react-icons/fa6";
+import { FaPlus } from "react-icons/fa6";
 import { MdGroupAdd } from "react-icons/md";
-
 import { Link } from "react-router-dom";
 
 const Friends = () => {
   const [friendArray, setFriendArray] = useState([
+    // { img: "", name: "Rohimat" },
+    // { img: "", name: "Ife" },
+    // { img: "", name: "John" },
+    // { img: "", name: "Jamiu" },
     // { img: "", name: "Rohimat" },
     // { img: "", name: "Ife" },
     // { img: "", name: "John" },
@@ -65,12 +26,21 @@ const Friends = () => {
 
   return (
     <div className={sectionLayout}>
+      {/* ===================== NO FRIENDS */}
       {initialFriends ? (
-        <div className="flex flex-col items-center  gap-3">
-          <p className="font-bold text-center">
-            You have no friends added. Add friends to start sharing bills.
-          </p>
-          <div>
+        <div className="h-[400px] flex justify-center items-center">
+          <div className="flex flex-col gap-4 items-center">
+            <div className="text-center">
+              <p className="font-bold text-[28px] ">
+                You have no friends added.
+              </p>
+
+              <p className="font-bold text-[28px] ">
+                {" "}
+                Add friends to start sharing bills.
+              </p>
+            </div>
+
             <Link
               to="addfriend"
               className="flex items-center gap-1 text-primary-100"
@@ -81,22 +51,29 @@ const Friends = () => {
           </div>
         </div>
       ) : (
-        <div className="flex flex-row-reverse items-start">
-          <Link to="addfriend">
-            <button
-              type="button"
-              className="text-cool-white-100 bg-primary-100 border py-3 px-5 sm:p-1 flex items-center gap-1 rounded-md"
-            >
-              <FaPlus /> Add Friend
-            </button>
-          </Link>
-          <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-10 mt-20 text-[40px]">
+        // ============================ FRIENDS LIST
+        <div className="">
+          {/* ============== button */}
+          <div className="flex justify-end">
+            <Link to="addfriend">
+              <button
+                className={`h-[48px] w-[180px] text-cool-white-100 bg-primary-100   flex justify-center items-center font-semibold rounded`}
+              >
+                <p className="flex items-center gap-2">
+                  {<FaPlus />} Add Friend
+                </p>
+              </button>
+            </Link>
+          </div>
+
+          {/* ================ list */}
+          <div className="flex flex-wrap gap-8  mt-8 text-[22px]">
             {friendArray.map((friend, index) => (
               <div
                 key={index}
                 className="flex flex-col items-center justify-center"
               >
-                <div className="h-[150px] w-[150px] rounded-full bg-gray-500 border-none">
+                <div className="h-[170px] w-[170px] rounded-full bg-gray-500 border-none">
                   {friend.img}
                 </div>
                 <p className="text-center">{friend.name}</p>

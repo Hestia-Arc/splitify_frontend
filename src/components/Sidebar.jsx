@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FaPowerOff, FaUserFriends } from "react-icons/fa";
+import { FaPowerOff, FaWallet, FaUserFriends } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import {
   MdDashboard,
@@ -22,9 +22,9 @@ const Sidebar = () => {
       icon: <FaUserFriends className="w-8 h-8" />,
     },
     {
-      name: "Groups",
-      path: "groups",
-      icon: <MdOutlineGroups className="w-8 h-8" />,
+      name: "Expenses",
+      path: "expenses",
+      icon: < FaWallet className="w-8 h-8" />,
     },
     {
       name: "Setting",

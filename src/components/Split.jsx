@@ -1,25 +1,31 @@
-import React from 'react'
+import React from "react";
+import bg from "../assets/images/image 2.png"
+import { landingStyle } from "../utils/sections";
 
 const Split = () => {
   return (
-    <div><section className="w-full bg-cool-white-100 py-20">
-    <div className="flex items-center gap-5   w-[90%] m-auto justify-between">
-      <div className="flex items-center flex-col  text-center">
-        <h2 className="text-lg font-bold tracking-tighter">
-          Split Bills Easily{" "}
-        </h2>
-        <p className="text-sm">
-          Add friends and split bills in just a few taps
-        </p>
-      </div>
-      <img
-        src="src/assets/images/image 2.png"
-        alt=""
-        className="object-contain  w-[60%]"
-      />
-    </div>
-  </section></div>
-  )
-}
+      <section className={landingStyle}>
+          <div className="flex-1 flex justify-center items-center flex-col  text-center">
+            <h2 className="text-[3.8rem] font-bold ">
+              Split Bills Easily{" "}
+            </h2>
+            <p className="text-[20px]">
+              Add friends and split bills in just a few taps.
+            </p>
+          </div>
 
-export default Split
+          {/* --------- */}
+          <div className="flex-1 h-full w-full"
+           style={{
+            backgroundImage: `url(${bg})`,
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "top",
+            backgroundSize: "contain",
+          }}
+          ></div>
+          
+      </section>
+  );
+};
+
+export default Split;

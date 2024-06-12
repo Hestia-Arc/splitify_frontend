@@ -7,12 +7,12 @@ const inputStyle =
   "h-9 border text-[16px] bg-transparent px-2 py-1 border-[#B70569] rounded";
 const labelStyle = "text-[16px] mb-1";
 
-const AddFriend = () => {
+const AddExpense = () => {
   return (
     <div className={sectionLayout}>
       <div className="flex gap-2 mb-6">
-        <Link to="../friends">--</Link>
-        <div className="text-[32px]">Add Friend</div>
+        <Link to="../expenses">--</Link>
+        <div className="text-[32px]">Create Expense</div>
       </div>
 
       {/* -------- form */}
@@ -20,13 +20,13 @@ const AddFriend = () => {
         {/* ------1  */}
         <div className="flex flex-col">
           <label className={labelStyle} htmlFor="email">
-            Name
+            Bill Name
           </label>
           <input
             type="text"
             name="name"
             id="email"
-            placeholder="Your name"
+            placeholder="Enter your bill name"
             className={inputStyle}
             // value={formData.email}
             // onChange={inputChange}
@@ -36,7 +36,7 @@ const AddFriend = () => {
         {/* ------- 2 */}
         <div className="flex flex-col">
           <label className={labelStyle} htmlFor="email">
-            Email
+            Category
           </label>
           <input
             type="email"
@@ -49,38 +49,50 @@ const AddFriend = () => {
           />
         </div>
 
-        {/* --------------- 3 */}
+        {/* ------- 3 */}
         <div className="flex flex-col">
           <label className={labelStyle} htmlFor="email">
-            Image:
+            Amount
           </label>
           <input
-            type="file"
-            name="image"
-            accept="image/*"
-            required
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Enter amount"
             className={inputStyle}
+            // value={formData.email}
+            // onChange={inputChange}
           />
         </div>
 
-        {/* -------------- 4 */}
-        <div className="flex flex-col">
-          <label className={labelStyle} htmlFor="email">
-            Reason:
-          </label>
-          <textarea
-            name="Reason"
-            required
-            className="mt-1 px-3 py-2 bg-white border shadow-sm border-primary-100 h-32  focus:outline-none focus:border-gray-900 focus:ring-gray-900 block w-full rounded-md sm:text-sm focus:ring-1"
-          ></textarea>
-        </div>
+        {/* --------------- choose friends */}
+        <div className="h-[100px] bg-slate-500"></div>
+
+        {/* ------------------- button */}
         <ButtonPrimary
-          text="Send Invite"
+          text="Save"
           style="bg-primary-100 text-cool-white-100 hover:bg-[#B70569] hover:bg-opacity-90 transition-all duration-300"
         />
       </form>
+
+      {/* <select
+            name="Currency"
+            className="mt-1 px-3 py-2 bg-white border shadow-sm border-primary-100  focus:outline-none focus:border-gray-900 focus:ring-gray-900 block w-full rounded-md sm:text-sm focus:ring-1"
+          >
+            <option value="">Currency</option>
+            <option value="USD">United States Dollar (USD)</option>
+            <option value="EUR">Euro (EUR)</option>
+            <option value="JPY">Japanese Yen (JPY)</option>
+            <option value="GBP">British Pound (GBP)</option>
+            <option value="AUD">Australian Dollar (AUD)</option>
+            <option value="CAD">Canadian Dollar (CAD)</option>
+            <option value="CHF">Swiss Franc (CHF)</option>
+            <option value="CNY">Chinese Yuan (CNY)</option>
+            <option value="SEK">Swedish Krona (SEK)</option>
+            <option value="NZD">New Zealand Dollar (NZD)</option>
+          </select> */}
     </div>
   );
 };
 
-export default AddFriend;
+export default AddExpense;

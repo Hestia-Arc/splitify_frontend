@@ -6,23 +6,22 @@ import Settle from "../components/Settle";
 import Transform from "../components/Transform";
 import Partners from "../components/Partners";
 import Footer from "../components/Footer";
+
+
 function LandingPage() {
- 
   return (
-    <div className="">
-      <div className="flex flex-col ">
-        <LandpageHeader />
-        <main className="flex-1">
-          <Split />
-          <Track />
-          <Settle />
-          <Transform />
-          <Partners />
-        </main>
-        <footer>
-          <Footer />
-        </footer>
-      </div>
+    <div className=" bg-cool-white-100">
+      <LandpageHeader />
+
+      <main>
+        <Split />
+        <Track />
+        <Settle />
+        <Transform />
+        <Partners />
+      </main>
+
+      <Footer />
     </div>
   );
 }

@@ -3,8 +3,6 @@ import { Route, Routes } from "react-router-dom";
 import Overview from "./components/dashboard/Overview";
 import Friends from "./components/dashboard/Friends";
 import AddFriend from "./components/dashboard/AddFriend";
-import Groups from "./components/dashboard/Groups";
-import AddGroup from "./components/dashboard/AddGroup";
 import Setting from "./components/dashboard/Setting";
 import LandingPage from "./pages/LandingPage";
 import SignUp from "./pages/SignUp";
@@ -12,6 +10,8 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/dashboard/Dashboard";
 import ProtectedRoute from "./services/ProtectedRoute";
 import PageNotFound from "./pages/PageNotFound";
+import Expenses from "./components/dashboard/Expenses";
+import AddExpense from "./components/dashboard/AddExpense";
 
 const App = () => {
   return (
@@ -34,8 +34,8 @@ const App = () => {
             <Route index element={<Overview />} />
             <Route path="friends" element={<Friends />} />
             <Route path="friends/addfriend" element={<AddFriend />} />
-            <Route path="groups" element={<Groups />} />
-            <Route path="groups/addgroup" element={<AddGroup />} />
+            <Route path="expenses" element={<Expenses />} />
+            <Route path="expenses/addexpense" element={<AddExpense />} />
             <Route path="setting" element={<Setting />} />
           </Route>
         </Route>

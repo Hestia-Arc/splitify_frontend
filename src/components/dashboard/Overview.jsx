@@ -19,10 +19,10 @@ const Overview = () => {
   const handleMonthChange = (e) => setSelectedMonth(e.target.value);
   const handleYearChange = (e) => setSelectedYear(e.target.value);
 
-  const [cardArray, setCardArray] = useState([ 
-    // { expense: "Total Expenses", amount: "N80,000" },
-    // { expense: "You Owe", amount: "N50,000" },
-    // { expense: "You Are Owed ", amount: "-N50,000" },
+  const [cardArray, setCardArray] = useState([
+    { expense: "Total Expenses", amount: "N80,000" },
+    { expense: "You Owe", amount: "N50,000" },
+    { expense: "You Are Owed ", amount: "-N50,000" },
   ]);
   const expenseArray = [
     {
@@ -62,7 +62,7 @@ const Overview = () => {
   }, [cardArray.length]);
 
   const handleAddFriend = () => {
-    setCardArray([...cardArray, ]);
+    setCardArray([...cardArray]);
   };
 
   return (
@@ -110,21 +110,27 @@ const Overview = () => {
         </div>
       </div>
 
+      {/* ======================== NO HISTORY */}
       {initialOverview ? (
-        <div className="flex flex-col items-center gap-3">
-          <p className="font-bold text-center">
-            As you use Splitify, your transaction history will appear her. Add
-            friends and start share bills
-          </p>
-          <div className="">
-            <Link
-              to="friends/addfriend "
-              className="flex items-center gap-1 text-primary-100"
-            >
-              {" "}
-              <MdGroupAdd className="text-2xl " />
-              <p>Add Friend</p>
-            </Link>
+        <div className="h-[400px] flex justify-center items-center ">
+          <div className=" flex flex-col justify-center items-center">
+            <p className="font-bold text-[24px] text-center">
+              As you use Splitify, your transaction history will appear here.
+            </p>
+            <p className="font-bold text-[24px] text-center">
+              Add friends and start share bills.
+            </p>
+
+            <div className="mt-3">
+              <Link
+                to="friends/addfriend "
+                className="flex items-center gap-1 text-primary-100"
+              >
+                {" "}
+                <MdGroupAdd className="text-2xl " />
+                <p>Add Friend</p>
+              </Link>
+            </div>
           </div>
         </div>
       ) : (
@@ -211,19 +217,21 @@ const Overview = () => {
             </div>
           </div>
 
-          <div className="flex justify-between my-10 border-b pb-5">
-            <div className="h-10 w-10 rounded-full bg-gray-500 border-none"></div>
+          {/* ---------- History */}
+          <div className="min-h-[100px] w-full border p-3 mt-8 rounded-md">
             <div>
-              <p>Barbecue</p>
-              <p>
-                {selectedDay !== "Day" ? selectedDay : "Day"} /
-                {selectedMonth !== "Month" ? selectedMonth : "Month"} /
-                {selectedYear !== "Year" ? selectedYear : "Year"}
-              </p>
+              <div className=" text-subTitle font-bold">Split Bill History</div>
             </div>
-            <div>
-              <p>N2500</p>
-              <p>Paid</p>
+
+            <div className="mt-3">
+              {/* -------- each */}
+              <div className="h-[120px] py-4 border-b-2 flex items-center">
+                {/* -------- left */}
+                <div className="flex-1 h-full bg-slate-500"></div>
+
+                {/* -------- right */}
+                <div className="flex-1 h-full bg-rose-500"></div>
+              </div>
             </div>
           </div>
         </div>
