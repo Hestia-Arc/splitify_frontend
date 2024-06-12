@@ -12,8 +12,8 @@ const Footer = () => {
     { member: "Rohimat Mustapha" },
   ];
   return (
-    <footer className=" h-[400px] w-full bg-primary-100 pt-8 px-16 ">
-      <div className="h-[80%] w-full flex justify-between text-cool-white-100  ">
+    <footer className="min-h[400px] sm:h-[400px] w-full bg-primary-100 pt-8 px-3 sm:px-16 ">
+      <div className="h-[80%] w-full flex flex-col sm:flex-row gap-8 sm:gap-0 justify-between text-cool-white-100  ">
         <div className="flex-1">
           <div className=" h-[82px] w-[120px] rounded-md  flex justify-center items-center bg-cool-white-100 bg-opacity-70">
             <img src={logo} alt="logo" className="h-[80px] w-[100px]" />
@@ -21,7 +21,7 @@ const Footer = () => {
         </div>
 
         {/* ----------------- */}
-        <div className="w-[58%] flex justify-between ">
+        <div className="w-full sm:w-[58%] flex flex-col sm:flex-row gap-6 sm:gap-0 justify-between ">
           {/* --------- 1 */}
           <div>
             <h6 className="text-[20px] font-bold mb-2 text-[#dad7d7]">
@@ -66,7 +66,7 @@ const Footer = () => {
       </div>
 
       {/* ------- copyright */}
-      <div className="text-center text-[#dad7d7]">
+      <div className="text-center text-[#dad7d7] pt-10 pb-5 sm:py-0">
           <p>2024 Splitify. All rights reserved.</p>
         </div>
     </footer>

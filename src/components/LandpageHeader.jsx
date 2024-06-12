@@ -9,7 +9,7 @@ const LandpageHeader = () => {
 
   return (
     <header
-      className=" h-screen w-full relative bg-gray-900/50 py-5 px-16 "
+      className=" h-[680px] w-full relative bg-gray-900/50 py-5 px-3 sm:px-16 "
       style={{
         backgroundImage: `url(${backgd})`,
         backgroundRepeat: "no-repeat",
@@ -24,7 +24,7 @@ const LandpageHeader = () => {
             <img src={logo} alt="logo" className="h-[80px] w-[100px]" />
           </div>
 
-          <div className="flex gap-4">
+          <div className="hidden sm:flex gap-4">
             <Link to="/signup">
               <ButtonPrimary
                 text="Sign up"
@@ -42,14 +42,14 @@ const LandpageHeader = () => {
         </nav>
 
         {/* --------------- Tags */}
-        <div className=" text-white w-[60%]">
+        <div className=" text-white w-full sm:w-[60%]">
           <div>
-            <h1 className="text-[3rem] font-lato leading-[60px] font-bold mb-3">
+            <h1 className="text-[2.1rem] sm:text-[3rem] font-lato leading-10 sm:leading-[60px] font-bold mb-3">
               Effortlessly split expenses, track debts, and settle balances
             </h1>
           </div>
 
-          <p className="text-[19px] text-[#dad7d7] mb-14">
+          <p className="text-[15.5px] sm:text-[19px] text-[#dad7d7] mb-14">
             Whether it’s dinner with friends, a weekend getaway, or household
             expenses, our app simplifies bill splitting. Say goodbye to manual
             calculations and awkward conversations!{" "}
