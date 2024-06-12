@@ -149,7 +149,7 @@ function Login() {
           </form>
           <div>
             <div className="text-[14px] text-[#777] mt-2">
-              Don't have an account? <span className="text-[#B70569] font-bold ml-1">Create Account</span>
+              Don't have an account? <Link to="/signup" className="text-[#B70569] font-bold ml-1">Create Account</Link>
             </div>
           </div>
         </div>

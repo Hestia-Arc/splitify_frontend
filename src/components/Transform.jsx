@@ -9,8 +9,8 @@ const Transform = () => {
     <section className={`${landingStyle} bg-primary-50`}>
       {/* ------------- */}
       <div className="flex-1 flex justify-center items-center ">
-        <div className=" w-[70%] flex flex-col gap-8 justify-center items-center ">
-          <p className="text-[20px] text-center">
+        <div className="w-full sm:w-[70%] flex flex-col gap-8 justify-center items-center ">
+          <p className="text-[18px] sm:text-[20px] text-center">
             Transform the way you share expenses with friends. Splitify takes
             the hassle out of managing group expenses, ensuring fair and
             transparent split every time. Try it now and experience effortless
@@ -27,7 +27,7 @@ const Transform = () => {
       </div>
 
       {/* ------------ */}
-      <div className="flex-1 flex justify-center items-center">
+      <div className=" sm:flex-1 flex justify-center items-center">
         <img src={bg} alt="" className="h-[400px] w-[600px]" />
       </div>
     </section>
