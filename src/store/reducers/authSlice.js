@@ -2,12 +2,14 @@ import { createSlice } from '@reduxjs/toolkit';
 import { signup } from '../actions/auth/signup';
 import { login } from '../actions/auth/login';
 import { logout } from '../actions/auth/logout';
+import { userAccount } from '../actions/auth/account';
 const storedUser = JSON.parse(localStorage.getItem('user'));
 
 const authSlice = createSlice({
   name: 'auth',
   initialState: {
     user: storedUser || null, 
+    account: null,
     loading: false, 
     error: null,
   },
@@ -35,6 +37,19 @@ const authSlice = createSlice({
         state.user = action.payload?.user;
       })
       .addCase(login.rejected, (state, action) => {
+        state.loading = false; 
+        state.error = action.error.message;
+      })
+
+       // ---------- ACCOUNT
+       .addCase(userAccount.pending, (state) => {
+        state.loading = true; 
+      })
+      .addCase(userAccount.fulfilled, (state, action) => { 
+        state.loading = false; 
+        state.account = action.payload; 
+      })
+      .addCase(userAccount.rejected, (state, action) => { 
         state.loading = false; 
         state.error = action.error.message;
       })
