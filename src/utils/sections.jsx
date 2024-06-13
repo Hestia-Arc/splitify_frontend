@@ -1,4 +1,4 @@
-export const sectionLayout = "min-h-40 m-4 sm:m-8 ";
+export const sectionLayout = "min-h-40 mx-4 my-10 sm:m-8  ";
 
 
 // --------------- for landing page

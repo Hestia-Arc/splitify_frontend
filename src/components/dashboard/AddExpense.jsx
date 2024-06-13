@@ -12,11 +12,11 @@ const AddExpense = () => {
     <div className={sectionLayout}>
       <div className="flex gap-2 mb-6">
         <Link to="../expenses">--</Link>
-        <div className="text-[32px]">Create Expense</div>
+        <div className="text-[32px] font-bold">Create Expense</div>
       </div>
 
       {/* -------- form */}
-      <form className="w-[60%] flex flex-col gap-4">
+      <form className=" w-full sm:w-[60%] flex flex-col gap-4">
         {/* ------1  */}
         <div className="flex flex-col">
           <label className={labelStyle} htmlFor="email">

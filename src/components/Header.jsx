@@ -6,7 +6,7 @@ const Header = () => {
     <header className="h-[70px] sticky top-0 left-0 right-0 flex justify-between  px-5 items-center bg-primary-10  z-50  border-r-gray-400 border-b">
       <div class="relative block ">
         <input
-          className="placeholder:italic  text-wrap placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 pl-2  pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"
+          className="hidden sm:block placeholder:italic  text-wrap placeholder:text-slate-400 bg-white w-full border border-slate-300 rounded-md py-2 pl-2  pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"
           placeholder="Search for Friends..."
           name="search"
         />

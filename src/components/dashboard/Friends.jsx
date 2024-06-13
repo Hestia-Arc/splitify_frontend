@@ -3,31 +3,15 @@ import { sectionLayout } from "../../utils/sections";
 import { FaPlus } from "react-icons/fa6";
 import { MdGroupAdd } from "react-icons/md";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Friends = () => {
-  const [friendArray, setFriendArray] = useState([
-    // { img: "", name: "Rohimat" },
-    // { img: "", name: "Ife" },
-    // { img: "", name: "John" },
-    // { img: "", name: "Jamiu" },
-    // { img: "", name: "Rohimat" },
-    // { img: "", name: "Ife" },
-    // { img: "", name: "John" },
-    // { img: "", name: "Jamiu" },
-  ]);
-
-  const [initialFriends, setInitialFriends] = useState(true);
-
-  useEffect(() => {
-    if (friendArray.length > 0) {
-      setInitialFriends(false);
-    }
-  }, [friendArray.length]);
+  const { account } = useSelector((state) => state?.auth);
 
   return (
     <div className={sectionLayout}>
       {/* ===================== NO FRIENDS */}
-      {initialFriends ? (
+      {account?.data?.friends?.length === 0 ? (
         <div className="h-[400px] flex justify-center items-center">
           <div className="flex flex-col gap-4 items-center">
             <div className="text-center">
@@ -68,15 +52,18 @@ const Friends = () => {
 
           {/* ================ list */}
           <div className="flex flex-wrap gap-8  mt-8 text-[22px]">
-            {friendArray.map((friend, index) => (
+            {account?.data?.friends?.map((friend, index) => (
               <div
                 key={index}
-                className="flex flex-col items-center justify-center"
+                className="flex flex-col gap-2 items-center justify-center"
               >
-                <div className="h-[170px] w-[170px] rounded-full bg-gray-500 border-none">
-                  {friend.img}
+                <div className="p-2 border border-rose-200 shadow rounded-full">
+                  <div className="h-[110px] w-[110px] sm:h-[170px] sm:w-[170px] text-[2.5rem] font-bold flex justify-center items-center rounded-full border bg-gray-300 shadow-lg ">
+                    {friend.name.slice(0, 1)}
+                  </div>
                 </div>
-                <p className="text-center">{friend.name}</p>
+
+                <p className="text-center text-[14px]  sm:text-[15px] ">{friend.name}</p>
               </div>
             ))}
           </div>

@@ -24,7 +24,7 @@ const Overview = () => {
 
   const [initialOverview, setInitialOverview] = useState(true);
 
-  console.log(account);
+  // console.log(account);
   useEffect(() => {
     dispatch(userAccount());
   }, []);
@@ -102,7 +102,7 @@ const Overview = () => {
         </div>
 
         {/* ------------ */}
-        <div className="flex items-center gap-2">
+        <div className="hidden sm:flex items-center gap-2">
           <select
             className={calenderStyle}
             value={selectedDay}
@@ -134,7 +134,7 @@ const Overview = () => {
       </div>
 
       {/* ======================== NO HISTORY */}
-      {account?.length === 0 ? (
+      {!account?.data?.fullname ? (
         <div className="h-[400px] flex justify-center items-center ">
           <div className=" flex flex-col justify-center items-center">
             <p className="font-bold text-[24px] text-center">
@@ -166,14 +166,14 @@ const Overview = () => {
                 className="h-[100px] shadow-md sm:h-[150px] w-full sm:w-2/3 flex flex-col items-center justify-center border rounded-md"
               >
                 <h1 className="font-bold">{card.expense}</h1>
-                <p className="text-lg font-bold">{card.amount}</p>
+                <p className="text-lg font-bold">₦{card.amount}</p>
               </div>
             ))}
           </div>
 
           {/* ========================= ACTIONS */}
-          <div className="h-[100px] mb-8 flex gap-5">
-            <div className="w-2/3">
+          <div className="min-h-[100px] w-full mb-8 flex flex-wrap sm:flex-nowrap sm:flex-row gap-4 sm:gap-5">
+            <div className=" w-[40%] sm:w-2/3">
               <Link to="./expenses">
                 <ButtonPrimary
                   text="Add Expense"
@@ -185,17 +185,17 @@ const Overview = () => {
             {/* ------ */}
             <ButtonPrimary
               text="Request"
-              style=" w-2/3 shadow text-primary-100 border border-gray-300 hover:bg-gray-300  hover:bg-opacity-90 transition-all duration-300"
+              style=" w-[40%] sm:w-2/3 shadow text-primary-100 border border-gray-300 hover:bg-gray-300  hover:bg-opacity-90 transition-all duration-300"
             />
 
             {/* --------- */}
             <ButtonPrimary
               text="Settle Balance"
-              style=" w-2/3 shadow text-primary-100 border border-gray-300 hover:bg-gray-300  hover:bg-opacity-90 transition-all duration-300"
+              style=" w-[40%] sm:w-2/3 shadow text-primary-100 border border-gray-300 hover:bg-gray-300  hover:bg-opacity-90 transition-all duration-300"
             />
 
             {/* --------- */}
-            <div className="w-2/3">
+            <div className="w-[40%] sm:w-2/3">
             <Link to="./friends">
             <ButtonPrimary
               text="Manage Friends"
@@ -211,7 +211,7 @@ const Overview = () => {
               Pending Transaction
             </div>
 
-            <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-5">
+            <div className="flex  items-center gap-3 overflow-x-auto sm:gap-5">
               {account?.data?.expenses?.map((item, index) => (
                 <div
                   key={index}
@@ -229,7 +229,7 @@ const Overview = () => {
                       Total Bill
                       </h4>
                       <p className="text-gray-900 font-semibold text-[20px]">
-                       N2500
+                      ₦{item.amount}
                       </p>
                     </div>
                     <div className="flex flex-col justify-between items-center">
@@ -237,7 +237,7 @@ const Overview = () => {
                        You Owe 20%
                       </h1>
                       <p className="text-gray-900 font-semibold text-[20px]">
-                        N750
+                      ₦750
                       </p>
                     </div>
                   </div>
@@ -272,12 +272,12 @@ const Overview = () => {
           </div>
 
           {/*========================= HISTORY */}
-          <div className="min-h-[100px] w-full border p-3 mt-8 rounded-md">
+          <div className="min-h-[100px] w-full border px-2 py-4 sm:p-3 mt-8 rounded-md">
             <div>
               <div className=" text-subTitle font-bold">Split Bill History</div>
             </div>
 
-            <div className="mt-5 px-6 pb-4">
+            <div className="mt-5 px-0 sm:px-6 pb-4">
               {/* -------- each ==========ARRAY */}
               {account?.data?.expenses?.map((item, index) => {
                 return (
@@ -287,28 +287,30 @@ const Overview = () => {
                   >
                     {/* -------- left */}
                     <div className="flex-1 h-full flex gap-2 items-center ">
-                      <div className="w-[50px] h-[50px] flex justify-center items-center font-extrabold uppercase rounded-full bg-slate-400">
+                      <div className="w-[50px] min-h-[50px] sm:h-[50px] flex justify-center items-center font-extrabold uppercase rounded-full bg-slate-400">
                         {item.title.slice(0, 2)}
                       </div>
 
                       {/* ------- */}
-                      <div className="flex flex-col gap-1">
-                        <div className="text-[18px] text-gray-800 font-bold">
+                      <div className=" w-[140px] sm:w-full flex-1 flex flex-col gap-1">
+                        <div className="text-[15px] sm:text-[18px] text-gray-800 font-bold">
                           {item.title}
                         </div>
-                        <div className="text-[15px] text-gray-500">
+                        <div className=" text-[12px] sm:text-[15px] text-gray-500">
                           {item.date.slice(0, 10)}
                         </div>
                       </div>
                     </div>
 
                     {/* -------- right */}
-                    <div className="flex-1 flex justify-end items-center gap-5 h-full">
+                    <div className="flex-1 flex justify-end items-center gap-1 sm:gap-5 h-full">
                       <div className="flex flex-col items-end gap-1">
-                        <div className="text-[18px] text-gray-800 font-bold">
-                          {item.amount}
+                        <div className=" text-[14px] sm:text-[18px] text-gray-800 font-bold">
+                        ₦{item.amount}
                         </div>
-                        <div className="text-[15px] text-green">Paid</div>
+                        {/* <div className="text-[15px] text-green">Paid</div> */}
+                        <div className="text-[15px] text-rose-500">Pending</div>
+
 
                         {/* <div className="text-[15px] text-gray-500">{item.date.slice(0, 10)}</div> */}
                       </div>

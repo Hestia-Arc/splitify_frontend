@@ -23,7 +23,7 @@ const rootReducer = (state, action) => {
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["expenses", "friends"],
+  whitelist: ["expenses", "friends", "auth"],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
