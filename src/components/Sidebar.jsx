@@ -1,14 +1,18 @@
 import { useState } from "react";
 import { FaPowerOff, FaWallet, FaUserFriends } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   MdDashboard,
   MdOutlineGroups,
   MdOutlineSettings,
   MdMenu,
 } from "react-icons/md";
+import { useDispatch } from "react-redux";
+import { logout } from "../store/actions/auth/logout";
 
 const Sidebar = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const menuItem = [
     {
       name: "Dashboard",
@@ -24,7 +28,7 @@ const Sidebar = () => {
     {
       name: "Expenses",
       path: "expenses",
-      icon: < FaWallet className="w-8 h-8" />,
+      icon: <FaWallet className="w-8 h-8" />,
     },
     {
       name: "Setting",
@@ -83,6 +87,7 @@ const Sidebar = () => {
       </div>
       {/* ==================== LOGOUT */}
       <div
+        onClick={() => dispatch(logout({ callback: () => navigate("/login") }))}
         className={` h-[48px] flex items-center  ${
           isOpen ? "justify-start" : "justify-center"
         }  gap-4 mb-4 hover:bg-primary-50 

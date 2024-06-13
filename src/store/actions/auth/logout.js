@@ -4,9 +4,12 @@ import Cookies from 'js-cookie';
 
 export const logout = createAsyncThunk(
   "logout",
-  async (_, { dispatch, rejectWithValue }) => {
+  async ({callback}, {rejectWithValue }) => {
     try {
-      Cookies.remove("accessToken"); 
+      Cookies.remove("accessTokenSCA"); 
+      localStorage.removeItem("splitifyUser");
+      callback();
+
     } catch (error) {
       toast.error("Logout failed: An unexpected error occurred");
       return rejectWithValue(

@@ -2,7 +2,7 @@ import Axios from "axios";
 import Cookies from "js-cookie";
 
 export const Client = async (params) => {
-  const token = Cookies.get("accessToken");
+  const token = Cookies.get("accessTokenSCA");
 
   const { path, method, data, queryParams, contentType } = params;
 
