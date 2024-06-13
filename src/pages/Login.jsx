@@ -1,94 +1,57 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import useAuth from "./../context/authContext";
 import logo from "../assets/images/split-logo.png";
 import groupImage from "../assets/images/authImage.png";
 import { ButtonPrimary } from "../components/elements/Button";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../store/actions/auth/login";
+import { useValidation } from "../utils/auth";
 
 const inputStyle =
   "h-9 border text-[16px] bg-transparent px-2 py-1 border-[#B70569] rounded";
 const labelStyle = "text-[16px] mb-1";
 
-// ================================================
-
 // ===================================================
 function Login() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { loginHandler } = useAuth();
-
+  const loading = useSelector((state) => state.auth.loading);
   //
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
 
-  //
-  const [showPassword, setShowPassword] = useState(false);
-  // eslint-disable-next-line
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [errorRegex, setErrorRegex] = useState(false);
-  const [errorAlert, setErrorAlert] = useState("");
+  const {
+    emailError,
+    passwordError,
+    isValidEmail,
+    isValidPassword,
+    validateField,
+  } = useValidation();
 
-  // const checkFields = email !== "" && password !== "";
+  const inputChange = (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
 
-  // useEffect(() => {
-  //   setErrorRegex("");
-  // }, [email, password]);
+    validateField(e.target.name, e.target.value, formData);
+  };
 
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    // REGEX TESTS
-    const cEmail = EMAIL_REGEX.test(email);
-    const cPassword = PWD_REGEX.test(password);
+    let data = {
+      email: formData.email,
+      password: formData.password,
+    };
 
-    if (!cPassword || !cEmail) {
-      setErrorRegex(true);
-      return;
-    } else {
-      setErrorRegex(false);
-    }
-
-    try {
-      setLoading(true);
-
-      const response = await loginHandler(email, password);
-
-      // GETTING RESPONSE
-      if (!response.ok) {
-        setEmail("");
-        setPassword("");
-
-        setErrorAlert("An error occur...");
-
-        throw new Error("An error occur...");
-      }
-
-      const data = await response.json();
-
-      if (data?.success) {
-        setEmail("");
-        setPassword("");
-        // localStorage.setItem("userID", data.userId);
-        // setToken(data.accessToken);
-
-        navigate("/dashboard");
-      }
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
+    // console.log(data);
+    dispatch(login({ data, callback: () => navigate("/dashboard") }));
   };
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
-
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
-
-  const inputChange = () => {};
 
   return (
     <div className="h-screen w-full flex bg-cool-white-100 overflow-y-auto  ">
@@ -107,7 +70,10 @@ function Login() {
         <div className=" bg-cool-white-100 h-[79%] flex flex-col items-center  rounded-t-[30px] sm:rounded-tl-[80px] sm:rounded-tr-[0px] rou mt-2 py-4 pb-10 sm:py-8  ">
           <div className="text-subTitle font-bold ">Welcome Back!</div>
 
-          <form action="" className="w-4/5 sm:w-3/5 flex flex-col gap-4 mt-8 ">
+          <form
+            onSubmit={submitHandler}
+            className="w-4/5 sm:w-3/5 flex flex-col gap-4 mt-8 "
+          >
             {/* ----- 1 */}
             <div className="flex flex-col">
               <label className={labelStyle} htmlFor="email">
@@ -122,6 +88,7 @@ function Login() {
                 value={formData.email}
                 onChange={inputChange}
               />
+              {emailError && <div>{emailError}</div>}
             </div>
 
             {/* ------- 3 */}
@@ -138,6 +105,7 @@ function Login() {
                 value={formData.password}
                 onChange={inputChange}
               />
+              {passwordError && <div>{passwordError}</div>}
             </div>
 
             {/* ------ btn */}
@@ -149,7 +117,10 @@ function Login() {
           </form>
           <div>
             <div className="text-[14px] text-[#777] mt-2">
-              Don't have an account? <Link to="/signup" className="text-[#B70569] font-bold ml-1">Create Account</Link>
+              Don't have an account?{" "}
+              <Link to="/signup" className="text-[#B70569] font-bold ml-1">
+                Create Account
+              </Link>
             </div>
           </div>
         </div>

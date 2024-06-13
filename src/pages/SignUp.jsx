@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import useAuth from "./../context/authContext";
-import { EMAIL_REGEX, PWD_REGEX } from "../utils/auth";
+import { useValidation } from "../utils/auth";
 import logo from "../assets/images/split-logo.png";
 import groupImage from "../assets/images/authImage.png";
 import { ButtonPrimary } from "../components/elements/Button";
+import { useDispatch, useSelector } from "react-redux";
+import { signup } from "../store/actions/auth/signup";
 
 const inputStyle =
   "h-9 border text-[16px] bg-transparent px-2 py-1 border-[#B70569] rounded";
@@ -12,7 +13,10 @@ const labelStyle = "text-[16px] mb-1";
 
 // ==========================================
 function SignUp() {
-  const { signupHandler } = useAuth();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const loading = useSelector((state) => state.auth.loading);
+  const [showPassword, setShowPassword] = useState(false);
 
   const [formData, setFormData] = useState({
     fullname: "",
@@ -21,107 +25,39 @@ function SignUp() {
     confirmPass: "",
   });
 
-  //
-  const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
+  const {
+    emailError,
+    passwordError,
+    isValidEmail,
+    isValidPassword,
+    validateField,
+  } = useValidation();
 
-  // eslint-disable-next-line
-  const [error, setError] = useState(false);
-  const [errorRegex, setErrorRegex] = useState(false);
-  const [errorAlert, setErrorAlert] = useState("");
+  const inputChange = (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
 
-  // const checkIndividuals =
-  //   firstName !== "" && lastName !== "" && email !== "" && password !== "";
-
-  // const checkCorporates = email !== "" && password !== "";
-
-  // const handleChange = (event) => {
-  //   setAccountType(event.target.value);
-  // };
-
-  // useEffect(() => {
-  //   setErrorRegex("");
-  // }, [email, password]);
+    validateField(e.target.name, e.target.value, formData);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let response;
-    // let dataError;
 
-    // REGEX TESTS
-    const cEmail = EMAIL_REGEX.test(email);
-    const cPassword = PWD_REGEX.test(password);
+    let data = {
+      fullname: formData.fullname,
+      email: formData.email,
+      password: formData.password,
+      confirmPassword: formData.confirmPass,
+    };
 
-    if (!cPassword || !cEmail) {
-      setErrorRegex(true);
-      return;
-    } else {
-      setErrorRegex(false);
-    }
-
-    try {
-      setLoading(true);
-
-      if (accountType === "Individual") {
-        response = await signupIndividualHandler(
-          firstName,
-          lastName,
-          email,
-          password,
-          dob
-        );
-      } else {
-        response = await signupBusinessHandler(
-          businessName,
-          email,
-          password,
-          doi
-        );
-      }
-
-      // GETTING RESPONSE STATUS
-      console.log(response);
-      console.log(response?.status);
-
-      if (response.status === 400) {
-        setFirstName("");
-        setLastName("");
-        setEmail("");
-        setDob("");
-        setDoi("");
-        setPassword("");
-
-        // dataError = response.json();
-
-        throw new Error("An error occur");
-      }
-
-      if (response.status === 200) {
-        setFirstName("");
-        setLastName("");
-        setEmail("");
-        setDob("");
-        setDoi("");
-        setPassword("");
-
-        navigate("/login");
-      }
-    } catch (error) {
-      console.log(error);
-      setErrorAlert(`An error occur.`);
-    } finally {
-      setLoading(false);
-    }
+    // console.log(data);
+    dispatch(signup({ data, callback: () => navigate("/login") }));
+    
   };
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
-
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
-
-  const inputChange = () => {};
 
   return (
     <div className="h-screen w-full flex bg-cool-white-100 overflow-y-auto  ">
@@ -140,7 +76,10 @@ function SignUp() {
         <div className=" bg-cool-white-100 h-[79%] flex flex-col items-center rounded-t-[30px] sm:rounded-tl-[80px] sm:rounded-tr-[0px] rou mt-2 py-4 pb-10   ">
           <div className="text-subTitle font-bold ">Create an account</div>
 
-          <form action="" className="w-4/5 sm:w-3/5 flex flex-col gap-3 mt-8 ">
+          <form
+            onSubmit={handleSubmit}
+            className="w-4/5 sm:w-3/5 flex flex-col gap-3 mt-8 "
+          >
             {/* ---- 1 */}
             <div className="flex flex-col">
               <label className={labelStyle} htmlFor="fullname">
@@ -152,7 +91,7 @@ function SignUp() {
                 id="fullname"
                 placeholder="Full Name"
                 className={inputStyle}
-                value=""
+                value={formData.fullname}
                 onChange={inputChange}
               />
             </div>
@@ -171,6 +110,7 @@ function SignUp() {
                 value={formData.email}
                 onChange={inputChange}
               />
+              {emailError && <div>{emailError}</div>}
             </div>
 
             {/* ------- 3 */}
@@ -187,6 +127,7 @@ function SignUp() {
                 value={formData.password}
                 onChange={inputChange}
               />
+              {passwordError && <div>{passwordError}</div>}
             </div>
 
             {/* -------- 4 */}
@@ -203,6 +144,7 @@ function SignUp() {
                 value={formData.confirmPass}
                 onChange={inputChange}
               />
+              {passwordError && <div>{passwordError}</div>}
             </div>
 
             {/* ------ btn */}
@@ -214,7 +156,10 @@ function SignUp() {
           </form>
           <div>
             <div className="text-[14px] text-[#777] mt-2">
-              Already have an account? <Link to="/login" className="text-[#B70569] font-bold ml-1">Login</Link>
+              Already have an account?{" "}
+              <Link to="/login" className="text-[#B70569] font-bold ml-1">
+                Login
+              </Link>
             </div>
           </div>
         </div>
