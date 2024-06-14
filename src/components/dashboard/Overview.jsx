@@ -134,7 +134,7 @@ const Overview = () => {
       </div>
 
       {/* ======================== NO HISTORY */}
-      {!account?.data?.fullname ? (
+      {account?.data?.expenses?.length === 0 ? (
         <div className="h-[400px] flex justify-center items-center ">
           <div className=" flex flex-col justify-center items-center">
             <p className="font-bold text-[24px] text-center">
