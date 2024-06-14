@@ -93,6 +93,7 @@ const AddFriend = () => {
             className={inputStyle}
             value={formData.name}
             onChange={inputChange}
+            required
           />
         </div>
 
@@ -109,6 +110,7 @@ const AddFriend = () => {
             className={inputStyle}
             value={formData.email}
             onChange={inputChange}
+            required
           />
         </div>
 
