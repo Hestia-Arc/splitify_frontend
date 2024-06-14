@@ -14,6 +14,7 @@ const Expenses = lazy(() => import("./components/dashboard/Expenses"));
 const AddExpense = lazy(() => import("./components/dashboard/AddExpense"));
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+const DetailExpense = lazy(() => import("./components/dashboard/DetailExpense"));
 
 const App = () => {
   return (
@@ -39,6 +40,7 @@ const App = () => {
               <Route path="friends/addfriend" element={<AddFriend />} />
               <Route path="expenses" element={<Expenses />} />
               <Route path="expenses/addexpense" element={<AddExpense />} />
+              <Route path="expenses/detailexpense" element={<DetailExpense />} />
               <Route path="setting" element={<Setting />} />
             </Route>
           </Route>
