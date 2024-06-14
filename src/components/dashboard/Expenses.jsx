@@ -3,16 +3,18 @@ import { sectionLayout } from "../../utils/sections";
 import { MdGroupAdd } from "react-icons/md";
 import { FaPlus } from "react-icons/fa6";
 import arrowRight from "../../assets/images/arrow-right.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ButtonPrimary } from "../elements/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllExpense } from "../../store/actions/expenses/getAllExpense";
+import { getExpenseById } from "../../store/actions/expenses/getExpenseByID";
 
 const Expenses = () => {
   const { expenses } = useSelector((state) => state?.expenses);
   const userID = localStorage.getItem("splitifyUser");
   const parID = JSON.parse(userID);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // console.log(parID.id)
   // console.log(friends);
@@ -20,7 +22,16 @@ const Expenses = () => {
     dispatch(getAllExpense(parID.id));
   }, []);
 
- 
+  const anExpense = (itemID) => {
+    let dataEx = {
+      owner: parID.id,
+      item: itemID,
+    };
+    dispatch(
+      getExpenseById({ dataEx, callback: () => navigate("detailexpense") })
+    );
+  };
+
   return (
     <div className={sectionLayout}>
       {/* ===================== NO EXPENSES */}
@@ -75,7 +86,9 @@ const Expenses = () => {
                     </div>
                     <p className="text-[16px] flex gap-3 text-gray-500">
                       <span>Date: {item.createdAt.slice(0, 10)}</span>
-                      <span className="capitalize">Category: {item.category}</span>
+                      <span className="capitalize">
+                        Category: {item.category}
+                      </span>
                     </p>
                   </div>
 
@@ -95,11 +108,18 @@ const Expenses = () => {
                 {/* ----------- right */}
                 <div className="flex-1 flex items-center justify-end gap-2">
                   <div className="text-[36px]">₦{item.amount}</div>
-                  <Link  className="w-[40px] h-40px] shadow-md p-2 border hover:scale-125 transition-all duration-300"> <img
-                        src={arrowRight}
-                        alt="icon"
-                        className="h-[24px] w-[26px]"
-                      /></Link>
+                  <Link
+                    to="detailexpense"
+                    onClick={() => anExpense(item?._id)}
+                    className="w-[40px] h-40px] shadow-md p-2 border hover:scale-125 transition-all duration-300"
+                  >
+                    {" "}
+                    <img
+                      src={arrowRight}
+                      alt="icon"
+                      className="h-[24px] w-[26px]"
+                    />
+                  </Link>
                 </div>
               </div>
             ))}

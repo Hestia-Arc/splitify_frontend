@@ -1,17 +1,18 @@
 import React, { useState } from "react";
-import { sectionLayout } from "../../utils/sections";
+import { StateLoader, sectionLayout } from "../../utils/sections";
 import { ButtonPrimary } from "../elements/Button";
 import { Link, useNavigate } from "react-router-dom";
 import arrowRight from "../../assets/images/arrow-right.png";
 import { useValidation } from "../../utils/auth";
 import { createFriend } from "../../store/actions/friends/createFriend";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const inputStyle =
   "h-9 border text-[16px] bg-transparent px-2 py-1 border-[#B70569] rounded";
 const labelStyle = "text-[16px] mb-1";
 
 const AddFriend = () => {
+  const loading = useSelector((state) => state?.friends?.loading);
   const userID = localStorage.getItem("splitifyUser");
   const parID = JSON.parse(userID); 
    const dispatch = useDispatch();
@@ -55,7 +56,13 @@ const AddFriend = () => {
   };
 
   return (
-    <div className={sectionLayout}>
+    <div className={`${sectionLayout} relative`}>
+
+       {/* ----- loader */}
+       {loading && <StateLoader checkStatus={loading} />}
+
+
+      {/* ---------------------- */}
       <div className="flex items-center gap-2 mb-6">
         <Link to="../friends">
           {" "}

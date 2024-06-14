@@ -6,27 +6,28 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { userAccount } from "../../store/actions/auth/account";
 import arrowRight from "../../assets/images/arrow-right.png";
-import f1 from "../../assets/images/Ellipse 9.jpg"
-import f2 from "../../assets/images/Ellipse 10.png"
-import f3 from "../../assets/images/Ellipse 11.png"
-import f4 from "../../assets/images/Ellipse 12.png"
+import f1 from "../../assets/images/Ellipse 9.jpg";
+import f2 from "../../assets/images/Ellipse 10.png";
+import f3 from "../../assets/images/Ellipse 11.png";
+import f4 from "../../assets/images/Ellipse 12.png";
+import { getAllExpense } from "../../store/actions/expenses/getAllExpense";
 
-
-const friendImage = [f1, f2, f3, f4]
+const friendImage = [f1, f2, f3, f4];
 
 const calenderStyle = "w-[90px] p-2 bg-transparent border rounded ";
 
 const Overview = () => {
+  const userID = localStorage.getItem("splitifyUser");
+  const user = JSON.parse(userID);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { account } = useSelector((state) => state?.auth);
-  // const { expenses } = useSelector((state) => state?.expenses)
+  const { expenses } = useSelector((state) => state?.expenses);
 
   const [initialOverview, setInitialOverview] = useState(true);
 
   // console.log(account);
   useEffect(() => {
-    dispatch(userAccount());
+    dispatch(getAllExpense(user?.id));
   }, []);
 
   const days = ["Day", ...Array.from({ length: 31 }, (_, i) => i + 1)];
@@ -96,8 +97,8 @@ const Overview = () => {
             Welcome back
           </div>
           <div className="bold text-black text-3xl font-bold font-poppins">
-            {account?.data?.fullname && account?.data?.fullname}
-            {!account?.data?.fullname && "Friend"}
+            {user?.fullname && user?.fullname}
+            {!user?.fullname && "Friend"}
           </div>
         </div>
 
@@ -134,7 +135,7 @@ const Overview = () => {
       </div>
 
       {/* ======================== NO HISTORY */}
-      {account?.data?.expenses?.length === 0 ? (
+      {expenses?.length === 0 ? (
         <div className="h-[400px] flex justify-center items-center ">
           <div className=" flex flex-col justify-center items-center">
             <p className="font-bold text-[24px] text-center">
@@ -160,15 +161,31 @@ const Overview = () => {
         <div>
           {/* ============================= HISTORY ---- TOTALS */}
           <div className="min-h-[150px] flex flex-col sm:flex-row items-center gap-3 sm:gap-10 mb-8">
-            {cardArray?.map((card, index) => (
-              <div
-                key={index}
-                className="h-[100px] shadow-md sm:h-[150px] w-full sm:w-2/3 flex flex-col items-center justify-center border rounded-md"
-              >
-                <h1 className="font-bold">{card.expense}</h1>
-                <p className="text-lg font-bold">₦{card.amount}</p>
-              </div>
-            ))}
+            {/* ------------- total */}
+            <div
+              className="h-[100px] shadow-md sm:h-[150px] w-full sm:w-2/3 flex flex-col items-center justify-center border rounded-md"
+            >
+              <h1 className="font-bold">Total Expenses</h1>
+              <p className="text-lg font-bold">₦5000</p>
+
+              {/* <p className="text-lg font-bold">₦{expenses?.amount}</p> */}
+            </div>
+
+            {/* -------- owe */}
+            <div
+              className="h-[100px] shadow-md sm:h-[150px] w-full sm:w-2/3 flex flex-col items-center justify-center border rounded-md"
+            >
+              <h1 className="font-bold">You Owe</h1>
+              <p className="text-lg font-bold">₦2000</p>
+            </div>
+
+            {/* --------------- owed */}
+            <div
+              className="h-[100px] shadow-md sm:h-[150px] w-full sm:w-2/3 flex flex-col items-center justify-center border rounded-md"
+            >
+              <h1 className="font-bold">You Are Owed</h1>
+              <p className="text-lg font-bold">₦500</p>
+            </div>
           </div>
 
           {/* ========================= ACTIONS */}
@@ -196,12 +213,12 @@ const Overview = () => {
 
             {/* --------- */}
             <div className="w-[40%] sm:w-2/3">
-            <Link to="./friends">
-            <ButtonPrimary
-              text="Manage Friends"
-              style=" w-full shadow text-primary-100 border border-gray-300 hover:bg-gray-300  hover:bg-opacity-90 transition-all duration-300"
-            />
-            </Link>
+              <Link to="./friends">
+                <ButtonPrimary
+                  text="Manage Friends"
+                  style=" w-full shadow text-primary-100 border border-gray-300 hover:bg-gray-300  hover:bg-opacity-90 transition-all duration-300"
+                />
+              </Link>
             </div>
           </div>
 
@@ -212,7 +229,7 @@ const Overview = () => {
             </div>
 
             <div className="flex  items-center gap-3 overflow-x-auto sm:gap-5">
-              {account?.data?.expenses?.map((item, index) => (
+              {expenses?.map((item, index) => (
                 <div
                   key={index}
                   className="h-[340px] w-full sm:w-[400px] shadow-lg border border-primary-50 flex flex-col items-center gap-5 bg-primary-50 rounded-lg p-4"
@@ -225,19 +242,15 @@ const Overview = () => {
                   {/* ------------ amount */}
                   <div className="h-[80px] w-full flex justify-center items-center gap-14">
                     <div className="flex flex-col items-center">
-                      <h4 className="text-gray-600 text-[15px]">
-                      Total Bill
-                      </h4>
+                      <h4 className="text-gray-600 text-[15px]">Total Bill</h4>
                       <p className="text-gray-900 font-semibold text-[20px]">
-                      ₦{item.amount}
+                        ₦{item.amount}
                       </p>
                     </div>
                     <div className="flex flex-col justify-between items-center">
-                      <h1 className="text-gray-600 text-[15px]">
-                       You Owe 20%
-                      </h1>
+                      <h1 className="text-gray-600 text-[15px]">You Owe 20%</h1>
                       <p className="text-gray-900 font-semibold text-[20px]">
-                      ₦750
+                        ₦750
                       </p>
                     </div>
                   </div>
@@ -279,7 +292,7 @@ const Overview = () => {
 
             <div className="mt-5 px-0 sm:px-6 pb-4">
               {/* -------- each ==========ARRAY */}
-              {account?.data?.expenses?.map((item, index) => {
+              {expenses?.map((item, index) => {
                 return (
                   <div
                     key={index}
@@ -306,11 +319,10 @@ const Overview = () => {
                     <div className="flex-1 flex justify-end items-center gap-1 sm:gap-5 h-full">
                       <div className="flex flex-col items-end gap-1">
                         <div className=" text-[14px] sm:text-[18px] text-gray-800 font-bold">
-                        ₦{item.amount}
+                          ₦{item.amount}
                         </div>
                         {/* <div className="text-[15px] text-green">Paid</div> */}
                         <div className="text-[15px] text-rose-500">Pending</div>
-
 
                         {/* <div className="text-[15px] text-gray-500">{item.date.slice(0, 10)}</div> */}
                       </div>

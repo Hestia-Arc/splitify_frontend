@@ -6,6 +6,7 @@ import { ButtonPrimary } from "../components/elements/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../store/actions/auth/login";
 import { useValidation } from "../utils/auth";
+import { StateLoader } from "../utils/sections";
 
 const inputStyle =
   "h-9 border text-[16px] bg-transparent px-2 py-1 border-[#B70569] rounded";
@@ -16,6 +17,8 @@ function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const loading = useSelector((state) => state.auth.loading);
+  // let [loadingee, setLoadingee] = useState(true);
+
   //
   const [formData, setFormData] = useState({
     email: "",
@@ -54,7 +57,10 @@ function Login() {
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
   return (
-    <div className="h-screen w-full flex bg-cool-white-100 overflow-y-auto  ">
+    <div className="h-screen w-full relative flex bg-cool-white-100 overflow-y-auto  ">
+      {/* ----- loader */}
+      {loading && <StateLoader checkStatus={loading} />}
+
       {/* -------------------------- left */}
       <div className=" h-fit flex-1 bg-[#D977AF] p-1 sm:p-0 ">
         {/* logo */}

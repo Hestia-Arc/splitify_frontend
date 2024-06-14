@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { sectionLayout } from "../../utils/sections";
+import { StateLoader, sectionLayout } from "../../utils/sections";
 import { ButtonPrimary } from "../elements/Button";
 import { Link, useNavigate } from "react-router-dom";
 import arrowRight from "../../assets/images/arrow-right.png";
@@ -14,6 +14,7 @@ const labelStyle = "text-[16px] mb-1";
 
 const AddExpense = () => {
   const { friends } = useSelector((state) => state?.friends);
+  const loading = useSelector((state) => state?.expenses?.loading);
   const userID = localStorage.getItem("splitifyUser");
   const parID = JSON.parse(userID);
   const dispatch = useDispatch();
@@ -61,7 +62,7 @@ const AddExpense = () => {
       currency: "",
       category: formData.category,
       members: friendList,
-      expenseType: "", 
+      expenseType: "",
     };
 
     // console.log(data);
@@ -69,11 +70,23 @@ const AddExpense = () => {
   };
 
   return (
-    <div className={sectionLayout}>
-      <div className="flex gap-2 mb-6">
-        <Link to="../expenses">
+    <div className={`${sectionLayout} relative`}>
+
+       {/* ----- loader */}
+       {loading && <StateLoader checkStatus={loading} />}
+
+       {/* --------------- */}
+      <div className="flex items-center gap-2 mb-6">
+        <Link
+          to="../expenses"
+          className="w-[40px] h-[40px] shadow-md p-1 flex justify-center items-center border hover:scale-125 transition-all duration-300"
+        >
           {" "}
-          <img src={arrowRight} alt="icon" className="h-[28px] w-[30px]" />
+          <img
+            src={arrowRight}
+            alt="icon"
+            className="h-[28px] w-[30px] rotate-180"
+          />
         </Link>
         <div className="text-[32px] font-bold">Create Expense</div>
       </div>
@@ -112,6 +125,8 @@ const AddExpense = () => {
             onChange={inputChange}
             // className="mt-1 px-3 py-2 bg-white border shadow-sm border-primary-100  focus:outline-none focus:border-gray-900 focus:ring-gray-900 block w-full rounded-md sm:text-sm focus:ring-1"
           >
+            <option >Select a category</option>
+
             <option value="Events">Events</option>
             <option value="Tours">Tours</option>
             <option value="Shopping">Shopping</option>
@@ -145,7 +160,7 @@ const AddExpense = () => {
         <select
           name="members"
           id="members"
-          className={inputStyle}
+          className={`${inputStyle} w-[200px]`}
           // value={formData.category}
           onChange={(event) => {
             // Destructure the target value and handle empty values
@@ -157,7 +172,7 @@ const AddExpense = () => {
             setFriendList((prevState) => [...prevState, value]);
           }}
         >
-          <option >Select a friend</option>
+          <option>Select a friend</option>
 
           {friends?.map((item, i) => {
             return (
@@ -167,7 +182,23 @@ const AddExpense = () => {
             );
           })}
         </select>
-        <div className="h-[100px] bg-slate-500"></div>
+
+        {/* -----show friends */}
+        <div className="h-[100px] flex items-center gap-3 px-2 border">
+          {friendList?.map((item, index) => {
+            return (
+              <div className="text-center">
+                <div
+                  key={index}
+                  className="h-[60px] w-[60px] flex justify-center items-center rounded-full bg-slate-400"
+                >
+                  {item?.slice(0, 1)}{" "}
+                </div>
+                <div className="text-[12px]">{item}</div>
+              </div>
+            );
+          })}
+        </div>
 
         {/* ------------------- button */}
         <ButtonPrimary
