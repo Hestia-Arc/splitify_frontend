@@ -15,11 +15,13 @@ const Footer = () => {
     <footer className="min-h[400px] sm:h-[400px] w-full bg-primary-100 pt-8 px-3 sm:px-16 ">
       <div className="h-[80%] w-full flex flex-col sm:flex-row gap-8 sm:gap-0 justify-between text-cool-white-100  ">
         <div className="flex-1">
-          <div className=" h-[82px] w-[120px] rounded-md  flex justify-center items-center bg-cool-white-100 bg-opacity-70">
-            <img src={logo} alt="logo" className="h-[80px] w-[100px]" />
+        <div className=" w-fit shadow-lg  p-[4px] bg-gray-500 bg-opacity-50  rounded-lg">
+            <div className=" h-[68px] w-[90px]  shadow  rounded-md   flex justify-center items-center bg-cool-white-100 bg-opacity-70">
+              <img src={logo} alt="logo" className="h-[65px] w-[90px]" />
+            </div>
           </div>
         </div>
-
+        {/* border border-gray-200 border-opacity-20 */}
         {/* ----------------- */}
         <div className="w-full sm:w-[58%] flex flex-col sm:flex-row gap-6 sm:gap-0 justify-between ">
           {/* --------- 1 */}

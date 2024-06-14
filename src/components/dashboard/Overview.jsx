@@ -297,7 +297,7 @@ const Overview = () => {
                           {item.title}
                         </div>
                         <div className=" text-[12px] sm:text-[15px] text-gray-500">
-                          {item.date.slice(0, 10)}
+                          {item?.createdAt?.slice(0, 10)}
                         </div>
                       </div>
                     </div>

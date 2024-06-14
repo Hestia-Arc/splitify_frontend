@@ -28,7 +28,7 @@ const Transform = () => {
 
       {/* ------------ */}
       <div className=" sm:flex-1 flex justify-center items-center">
-        <img src={bg} alt="" className="h-[400px] w-[600px]" />
+        <img src={bg} alt="" className="h-[300px] w-[320px] sm:h-[400px] sm:w-[600px]" />
       </div>
     </section>
   );
