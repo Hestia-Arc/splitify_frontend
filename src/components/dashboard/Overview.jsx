@@ -25,6 +25,20 @@ const Overview = () => {
 
   const [initialOverview, setInitialOverview] = useState(true);
 
+
+  // =================
+  const calTotal = (val) => {
+
+    let totalAll = 0;
+
+    val.forEach(d => totalAll += Number(d?.amount))
+
+    return totalAll.toLocaleString();
+
+  }
+
+
+
   // console.log(account);
   useEffect(() => {
     dispatch(getAllExpense(user?.id));
@@ -166,7 +180,7 @@ const Overview = () => {
               className="h-[100px] shadow-md sm:h-[150px] w-full sm:w-2/3 flex flex-col items-center justify-center border rounded-md"
             >
               <h1 className="font-bold">Total Expenses</h1>
-              <p className="text-lg font-bold">₦5000</p>
+              <p className="text-lg font-bold">₦{calTotal(expenses)}</p>
 
               {/* <p className="text-lg font-bold">₦{expenses?.amount}</p> */}
             </div>
@@ -176,7 +190,7 @@ const Overview = () => {
               className="h-[100px] shadow-md sm:h-[150px] w-full sm:w-2/3 flex flex-col items-center justify-center border rounded-md"
             >
               <h1 className="font-bold">You Owe</h1>
-              <p className="text-lg font-bold">₦2000</p>
+              <p className="text-lg font-bold">₦0</p>
             </div>
 
             {/* --------------- owed */}
@@ -184,7 +198,7 @@ const Overview = () => {
               className="h-[100px] shadow-md sm:h-[150px] w-full sm:w-2/3 flex flex-col items-center justify-center border rounded-md"
             >
               <h1 className="font-bold">You Are Owed</h1>
-              <p className="text-lg font-bold">₦500</p>
+              <p className="text-lg font-bold">₦0</p>
             </div>
           </div>
 
@@ -244,13 +258,13 @@ const Overview = () => {
                     <div className="flex flex-col items-center">
                       <h4 className="text-gray-600 text-[15px]">Total Bill</h4>
                       <p className="text-gray-900 font-semibold text-[20px]">
-                        ₦{item.amount}
+                        ₦{item?.amount.toLocaleString()}
                       </p>
                     </div>
                     <div className="flex flex-col justify-between items-center">
-                      <h1 className="text-gray-600 text-[15px]">You Owe 20%</h1>
+                      <h1 className="text-gray-600 text-[15px]">You Owe 0%</h1>
                       <p className="text-gray-900 font-semibold text-[20px]">
-                        ₦750
+                        ₦0
                       </p>
                     </div>
                   </div>
@@ -319,7 +333,7 @@ const Overview = () => {
                     <div className="flex-1 flex justify-end items-center gap-1 sm:gap-5 h-full">
                       <div className="flex flex-col items-end gap-1">
                         <div className=" text-[14px] sm:text-[18px] text-gray-800 font-bold">
-                          ₦{item.amount}
+                          ₦{item.amount.toLocaleString()}
                         </div>
                         {/* <div className="text-[15px] text-green">Paid</div> */}
                         <div className="text-[15px] text-rose-500">Pending</div>
