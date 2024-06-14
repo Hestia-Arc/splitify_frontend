@@ -8,6 +8,7 @@ import {
   MdMenu,
 } from "react-icons/md";
 import { useDispatch } from "react-redux";
+import logo from "../assets/images/split-logo.png";
 import { logout } from "../store/actions/auth/logout";
 
 const Sidebar = () => {
@@ -42,22 +43,27 @@ const Sidebar = () => {
     <div
       className={`hidden sm:block h-full bg-primary-10 ${
         isOpen ? "w-[150px] sm:w-[230px] " : "w-[58px] sm:w-[90px] "
-      }  px-2 border-r transition-all duration-300`}
+      }  px-2 pt-3 border-r transition-all duration-300`}
     >
       {/* =============== LOGO  TOGGLE */}
-      <div className="h-[70px] w-full flex items-center justify-between px-2 ">
-        <span
+      <div className="min-h-[58px] w-full flex items-start justify-between px-2 ">
+        <div
           className={`${
             isOpen ? "block" : "hidden "
           } font-bold text-[1.5rem] transition-all `}
         >
-          Splitify
-        </span>
+          <div className="shadow border border-gray-300 p-[2px]  rounded-md">
+            <div className=" h-[52px] w-[70px] border  rounded-md   flex justify-center items-center bg-cool-white-100 bg-opacity-70">
+              <img src={logo} alt="logo" className="h-[50px] w-[60px]" />
+            </div>
+          </div>
+        </div>
+
         <div
           onClick={toggleIsOpen}
-          className={`text-primary-100 hover:text-white hover:bg-primary-100 cursor-pointer z-20 p-1 rounded-md `}
+          className="flex justify-center items-center px-1 border border-gray-300 rounded-md shadow  text-primary-100 hover:text-white hover:bg-primary-100 cursor-pointer z-20 "
         >
-          <MdMenu className="w-8 h-8" />
+          <MdMenu className="w-8 h-8 " />
         </div>
       </div>
 

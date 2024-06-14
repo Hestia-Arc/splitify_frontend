@@ -20,8 +20,10 @@ const LandpageHeader = () => {
       <div className="h-full flex flex-col gap-[6rem] ">
         {/* ----- Navigation */}
         <nav className="h-[100px] w-full flex justify-between items-center ">
-          <div className=" h-[82px] w-[120px] rounded-md flex justify-center items-center bg-cool-white-100 bg-opacity-70">
-            <img src={logo} alt="logo" className="h-[80px] w-[100px]" />
+          <div className="shadow-lg border border-gray-500 p-[2px] bg-gray-500  rounded-lg">
+            <div className=" h-[68px] w-[90px] border shadow  rounded-md   flex justify-center items-center bg-cool-white-100 bg-opacity-70">
+              <img src={logo} alt="logo" className="h-[65px] w-[90px]" />
+            </div>
           </div>
 
           <div className="hidden sm:flex gap-4">

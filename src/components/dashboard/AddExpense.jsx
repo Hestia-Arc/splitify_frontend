@@ -55,13 +55,13 @@ const AddExpense = () => {
     let data = {
       owner: parID.id,
       title: formData.name,
-      category: formData.category,
-      amount: formData.amount,
-      members: friendList,
-      description: "",
-      currency: "",
-      expenseType: "",
+      description: "My new expense",
       date: "",
+      amount: formData.amount,
+      currency: "",
+      category: formData.category,
+      members: friendList,
+      expenseType: "", 
     };
 
     // console.log(data);
