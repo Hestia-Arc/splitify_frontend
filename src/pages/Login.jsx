@@ -93,6 +93,7 @@ function Login() {
                 className={inputStyle}
                 value={formData.email}
                 onChange={inputChange}
+                required
               />
               {emailError && <div>{emailError}</div>}
             </div>
@@ -110,6 +111,7 @@ function Login() {
                 className={inputStyle}
                 value={formData.password}
                 onChange={inputChange}
+                required
               />
               {passwordError && <div>{passwordError}</div>}
             </div>

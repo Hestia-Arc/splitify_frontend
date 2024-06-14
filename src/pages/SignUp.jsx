@@ -97,6 +97,7 @@ function SignUp() {
                 className={inputStyle}
                 value={formData.fullname}
                 onChange={inputChange}
+                required
               />
             </div>
 
@@ -113,6 +114,7 @@ function SignUp() {
                 className={inputStyle}
                 value={formData.email}
                 onChange={inputChange}
+                required
               />
               {emailError && <div>{emailError}</div>}
             </div>
@@ -130,6 +132,7 @@ function SignUp() {
                 className={inputStyle}
                 value={formData.password}
                 onChange={inputChange}
+                required
               />
               {passwordError && <div>{passwordError}</div>}
             </div>
@@ -147,6 +150,7 @@ function SignUp() {
                 className={inputStyle}
                 value={formData.confirmPass}
                 onChange={inputChange}
+                required
               />
               {passwordError && <div>{passwordError}</div>}
             </div>

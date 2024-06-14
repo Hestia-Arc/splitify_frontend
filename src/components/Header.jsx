@@ -48,7 +48,7 @@ const Header = ({toggleIsOpen}) => {
         <FaRocketchat className="h-5 w-5 fill-gray-900 " />
         <FaRegBell className="h-5 w-5 fill-gray-800" />
 
-        <div className="border border-gray-400 shadow-lg p-[3px] rounded-full">
+        <div className="border border-gray-300 bg-stone-300 shadow-md p-[3px] rounded-full">
           <div className="h-[50px] w-[50px] flex justify-center items-center font-bold bg-gray-500 rounded-full  text-[#fff]">
             {parID?.fullname?.slice(0, 1)}
           </div>
