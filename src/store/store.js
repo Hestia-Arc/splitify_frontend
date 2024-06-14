@@ -5,12 +5,15 @@ import storage from "redux-persist/lib/storage";
 import auth from "./reducers/authSlice";
 import expenses from "./reducers/expenseSlice";
 import friends from "./reducers/friendSlice";
+import sidebar from "./reducers/toggleSlice";
+
 
 
 const reducers = combineReducers({
   auth,
   expenses,
-  friends
+  friends,
+  sidebar
 });
 
 const rootReducer = (state, action) => {
