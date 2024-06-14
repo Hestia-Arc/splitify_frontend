@@ -25,19 +25,14 @@ const Overview = () => {
 
   const [initialOverview, setInitialOverview] = useState(true);
 
-
   // =================
   const calTotal = (val) => {
-
     let totalAll = 0;
 
-    val.forEach(d => totalAll += Number(d?.amount))
+    val.forEach((d) => (totalAll += Number(d?.amount)));
 
     return totalAll.toLocaleString();
-
-  }
-
-
+  };
 
   // console.log(account);
   useEffect(() => {
@@ -56,34 +51,6 @@ const Overview = () => {
   const handleMonthChange = (e) => setSelectedMonth(e.target.value);
   const handleYearChange = (e) => setSelectedYear(e.target.value);
 
-  const [cardArray, setCardArray] = useState([
-    { expense: "Total Expenses", amount: "N80,000" },
-    { expense: "You Owe", amount: "N50,000" },
-    { expense: "You Are Owed ", amount: "-N50,000" },
-  ]);
-  const expenseArray = [
-    {
-      item: "Barbecue",
-      total: "Total Bill",
-      owe: "You owe",
-      amount: "N2500",
-      oweAmount: "N200",
-    },
-    {
-      item: "Barbecue",
-      total: "Total Bill",
-      owe: "You owe",
-      amount: "N2500",
-      oweAmount: "N200",
-    },
-    {
-      item: "Barbecue",
-      total: "Total Bill",
-      owe: "You owe",
-      amount: "N2500",
-      oweAmount: "N200",
-    },
-  ];
   const friendsImg = [
     "/images/Ellipse 10.png",
     "/images/Ellipse 11.png",
@@ -92,16 +59,7 @@ const Overview = () => {
     "/images/Ellipse 14.png",
   ];
 
-  useEffect(() => {
-    if (cardArray.length > 0) {
-      setInitialOverview(false);
-    }
-  }, [cardArray.length]);
-
-  const handleAddFriend = () => {
-    setCardArray([...cardArray]);
-  };
-
+  let jj = "Oluwaseyi funmilayo";
   return (
     <div className={sectionLayout}>
       {/* ============ NAME */}
@@ -110,8 +68,12 @@ const Overview = () => {
           <div className="font-semibold text-[18px] sm:text-[22px] text-gray-500 mr-2">
             Welcome back
           </div>
+          {/* {jj.length > 10 ? `${jj.slice(0, 5)}...` : jj} */}
+
           <div className="bold text-black text-3xl font-bold font-poppins">
-            {user?.fullname && user?.fullname}
+            {user?.fullname?.length > 10
+              ? `${user?.fullname.slice(0, 8)}...`
+              : user?.fullname}
             {!user?.fullname && "Friend"}
           </div>
         </div>
@@ -176,9 +138,7 @@ const Overview = () => {
           {/* ============================= HISTORY ---- TOTALS */}
           <div className="min-h-[150px] flex flex-col sm:flex-row items-center gap-3 sm:gap-10 mb-8">
             {/* ------------- total */}
-            <div
-              className="h-[100px] shadow-md sm:h-[150px] w-full sm:w-2/3 flex flex-col items-center justify-center border rounded-md"
-            >
+            <div className="h-[100px] shadow-md sm:h-[150px] w-full sm:w-2/3 flex flex-col items-center justify-center border rounded-md">
               <h1 className="font-bold">Total Expenses</h1>
               <p className="text-lg font-bold">₦{calTotal(expenses)}</p>
 
@@ -186,17 +146,13 @@ const Overview = () => {
             </div>
 
             {/* -------- owe */}
-            <div
-              className="h-[100px] shadow-md sm:h-[150px] w-full sm:w-2/3 flex flex-col items-center justify-center border rounded-md"
-            >
+            <div className="h-[100px] shadow-md sm:h-[150px] w-full sm:w-2/3 flex flex-col items-center justify-center border rounded-md">
               <h1 className="font-bold">You Owe</h1>
               <p className="text-lg font-bold">₦0</p>
             </div>
 
             {/* --------------- owed */}
-            <div
-              className="h-[100px] shadow-md sm:h-[150px] w-full sm:w-2/3 flex flex-col items-center justify-center border rounded-md"
-            >
+            <div className="h-[100px] shadow-md sm:h-[150px] w-full sm:w-2/3 flex flex-col items-center justify-center border rounded-md">
               <h1 className="font-bold">You Are Owed</h1>
               <p className="text-lg font-bold">₦0</p>
             </div>
@@ -276,15 +232,27 @@ const Overview = () => {
                     </p>
 
                     {/* --------images */}
-                    <div className="h-[80px] w-full flex items-center gap-3">
-                      {friendImage.map((img, index) => (
+                    <div className="h-[80px] w-full flex items-center justify-center gap-3">
+                      {item?.members?.map((img, index) => (
+                        <div className=" border border-gray-300 shadow rounded-full p-[3px]">
+                          <div
+                            key={index}
+                            className="w-[30px] h-[30px] sm:w-[60px] sm:h-[60px] flex justify-center items-center bg-stone-600 bg-opacity-40 text-[#fff] text-[22px] shadow-lg rounded-full"
+                            alt=""
+                          >
+                            {img.slice(0, 1)}
+                          </div>
+                        </div>
+                      ))}
+
+                      {/* {friendImage.map((img, index) => (
                         <img
                           key={index}
                           src={img}
                           className="w-[30px] h-[30px] sm:w-[60px] sm:h-[60px] rounded-full"
                           alt=""
                         />
-                      ))}
+                      ))} */}
                     </div>
                   </div>
 

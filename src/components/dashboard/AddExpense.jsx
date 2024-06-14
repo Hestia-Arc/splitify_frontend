@@ -182,7 +182,7 @@ const AddExpense = () => {
             setFriendList((prevState) => [...prevState, value]);
           }}
         >
-          {/* <option>Select a friend</option> */}
+          <option>Select a friend</option>
 
           {friends?.map((item, i) => {
             return (

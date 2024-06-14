@@ -78,7 +78,7 @@ const Friends = () => {
                   {friend.name}
                 </p>
               </div>
-            ))}
+            )).reverse()}
           </div>
         </div>
       )}

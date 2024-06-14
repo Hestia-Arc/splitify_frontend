@@ -65,7 +65,7 @@ const Expenses = () => {
 
             <Link to="addexpense">
               <button
-                className={`h-[48px] w-[180px] text-cool-white-100 bg-primary-100   flex justify-center items-center font-semibold rounded`}
+                className={`h-[48px] w-[160px] sm:w-[180px] text-cool-white-100 bg-primary-100   flex justify-center items-center font-semibold rounded`}
               >
                 <p className="flex items-center gap-2">
                   {<FaPlus />} Add Expense
@@ -95,7 +95,7 @@ const Expenses = () => {
                   {/* ------btns */}
                   <div className="flex gap-2">
                     <ButtonPrimary
-                      text="Paid ₦5000"
+                      text="Paid ₦0"
                       style="min-w-[100px] px-30 sm:px-6 text-[12px] sm:text-[16px] rounded-md text-cool-white-100 bg-primary-100"
                     />
                     <ButtonPrimary
@@ -122,7 +122,7 @@ const Expenses = () => {
                   </Link>
                 </div>
               </div>
-            ))}
+            )).reverse()}
           </div>
         </div>
       )}
