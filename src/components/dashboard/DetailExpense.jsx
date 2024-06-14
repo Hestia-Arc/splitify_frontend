@@ -3,20 +3,35 @@ import { sectionLayout } from "../../utils/sections";
 import { useDispatch, useSelector } from "react-redux";
 import { getExpenseById } from "../../store/actions/expenses/getExpenseByID";
 import { FaPlus } from "react-icons/fa6";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ButtonPrimary } from "../elements/Button";
 import arrowRight from "../../assets/images/arrow-right.png";
+import { deleteExpense } from "../../store/actions/expenses/deleteExpense";
 
 function DetailExpense() {
   const { expense } = useSelector((state) => state?.expenses);
   const userID = localStorage.getItem("splitifyUser");
   const parID = JSON.parse(userID);
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   //   console.log(expense.title);
   //   useEffect(() => {
   //     dispatch(getExpenseById(parID.id));
+
+
   //   }, []);
+
+  // const handleDelete = (itemID) => {
+  //   let dataEx = {
+  //     owner: parID.id,
+  //     item: itemID,
+  //   };
+  //   dispatch(
+  //     deleteExpense({ dataEx, callback: () => navigate("../expenses") })
+  //   );
+  // };
+
 
   return (
     <div className={sectionLayout}>
@@ -38,11 +53,23 @@ function DetailExpense() {
         </div>
 
         {/* <Link to="../expense"> */}
-        <button
-          className={`h-[48px] w-[180px] text-cool-white-100 bg-primary-100   flex justify-center items-center font-semibold rounded`}
-        >
-          <p className="flex items-center gap-2">{<FaPlus />} Edit Expense</p>
-        </button>
+        <div className="flex items-center gap-3">
+          {/* -----delete */}
+          {/* <button
+          onClick={() => handleDelete(expense?._id)}
+            className={`h-[48px] w-[120px] text-cool-white-100 bg-primary-100   flex justify-center items-center font-semibold rounded`}
+          >
+            Delete
+          </button> */}
+
+          {/* ------------edit */}
+          <button
+            className={`h-[48px] w-[180px] text-cool-white-100 bg-primary-100   flex justify-center items-center font-semibold rounded`}
+          >
+            <p className="flex items-center gap-2">{<FaPlus />} Edit Expense</p>
+          </button>
+        </div>
+
         {/* </Link> */}
       </div>
 

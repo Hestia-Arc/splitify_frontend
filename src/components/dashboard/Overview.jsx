@@ -242,11 +242,11 @@ const Overview = () => {
               Pending Transaction
             </div>
 
-            <div className="flex  items-center gap-3 overflow-x-auto sm:gap-5">
+            <div className="w-full flex  items-center gap-3 overflow-x-auto pb-4 sm:gap-5">
               {expenses?.map((item, index) => (
                 <div
                   key={index}
-                  className="h-[340px] w-full sm:w-[400px] shadow-lg border border-primary-50 flex flex-col items-center gap-5 bg-primary-50 rounded-lg p-4"
+                  className="h-[340px] min-w-[290px] max-w-[298px] sm:min-w-[380px] sm:max-w-[380px]  shadow-lg border border-primary-50 flex flex-col items-center gap-5 bg-primary-50 rounded-lg p-4"
                 >
                   {/* -------- title */}
                   <p className="font-bold capitalize font-poppins text-[20px]">
@@ -281,7 +281,7 @@ const Overview = () => {
                         <img
                           key={index}
                           src={img}
-                          className="w-[60px] h-[60px] rounded-full"
+                          className="w-[30px] h-[30px] sm:w-[60px] sm:h-[60px] rounded-full"
                           alt=""
                         />
                       ))}

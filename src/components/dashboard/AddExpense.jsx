@@ -7,6 +7,7 @@ import { useValidation } from "../../utils/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { createExpense } from "../../store/actions/expenses/createExpense";
 import { getAllFriend } from "../../store/actions/friends/getAllFriend";
+import { toast } from "react-toastify";
 
 const inputStyle =
   "h-9 border text-[16px] bg-transparent px-2 py-1 border-[#B70569] rounded";
@@ -53,6 +54,10 @@ const AddExpense = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
 
+    if(friendList.length === 0 ){
+      toast.error("Please add a friend before creating an expense")
+    } else{
+
     let data = {
       owner: parID.id,
       title: formData.name,
@@ -60,13 +65,14 @@ const AddExpense = () => {
       date: "",
       amount: formData.amount,
       currency: "",
-      category: formData.category,
+      category: formData.category || "Others",
       members: friendList,
       expenseType: "",
     };
 
     // console.log(data);
     dispatch(createExpense({ data, callback: () => navigate("../expenses") }));
+  }
   };
 
   return (
@@ -109,6 +115,7 @@ const AddExpense = () => {
             className={inputStyle}
             value={formData.name}
             onChange={inputChange}
+            required
           />
         </div>
 
@@ -123,6 +130,7 @@ const AddExpense = () => {
             className={inputStyle}
             value={formData.category}
             onChange={inputChange}
+            required
             // className="mt-1 px-3 py-2 bg-white border shadow-sm border-primary-100  focus:outline-none focus:border-gray-900 focus:ring-gray-900 block w-full rounded-md sm:text-sm focus:ring-1"
           >
             <option >Select a category</option>
@@ -153,11 +161,13 @@ const AddExpense = () => {
             className={inputStyle}
             value={formData.amount}
             onChange={inputChange}
+            required
           />
         </div>
 
         {/* --------------- choose friends */}
         <select
+        required
           name="members"
           id="members"
           className={`${inputStyle} w-[200px]`}
@@ -172,7 +182,7 @@ const AddExpense = () => {
             setFriendList((prevState) => [...prevState, value]);
           }}
         >
-          <option>Select a friend</option>
+          {/* <option>Select a friend</option> */}
 
           {friends?.map((item, i) => {
             return (
