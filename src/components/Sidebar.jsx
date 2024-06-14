@@ -40,7 +40,7 @@ const Sidebar = () => {
   const toggleIsOpen = () => setIsOpen(!isOpen);
   return (
     <div
-      className={`hidden h-full bg-primary-10 ${
+      className={`hidden sm:block h-full bg-primary-10 ${
         isOpen ? "w-[150px] sm:w-[230px] " : "w-[58px] sm:w-[90px] "
       }  px-2 border-r transition-all duration-300`}
     >

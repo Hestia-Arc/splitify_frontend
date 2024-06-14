@@ -1,33 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { sectionLayout } from "../../utils/sections";
 import { MdGroupAdd } from "react-icons/md";
 import { FaPlus } from "react-icons/fa6";
 import arrowRight from "../../assets/images/arrow-right.png";
 import { Link } from "react-router-dom";
 import { ButtonPrimary } from "../elements/Button";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllExpense } from "../../store/actions/expenses/getAllExpense";
 
 const Expenses = () => {
-  const { account } = useSelector((state) => state?.auth);
+  const { expenses } = useSelector((state) => state?.expenses);
+  const userID = localStorage.getItem("splitifyUser");
+  const parID = JSON.parse(userID);
+  const dispatch = useDispatch();
 
-  const expenseList = [
-    {
-      title: "tours",
-    },
-    {
-      title: "tours",
-    },
-    {
-      title: "tours",
-    },
-    {
-      title: "tours",
-    },
-  ];
+  // console.log(parID.id)
+  // console.log(friends);
+  useEffect(() => {
+    dispatch(getAllExpense(parID.id));
+  }, []);
+
+ 
   return (
     <div className={sectionLayout}>
       {/* ===================== NO EXPENSES */}
-      {account?.data?.expenses?.length === 0 ? (
+      {expenses?.length === 0 ? (
         <div className="h-[400px] flex justify-center items-center">
           <div className="flex flex-col gap-4 items-center">
             <div className="text-center">
@@ -40,7 +37,7 @@ const Expenses = () => {
             </div>
 
             <Link
-              to="addfriend"
+              to="addexpense"
               className="flex items-center gap-1 text-primary-100"
             >
               <MdGroupAdd className="text-2xl" />
@@ -68,7 +65,7 @@ const Expenses = () => {
 
           {/* ================ list */}
           <div className="flex flex-wrap gap-3  mt-8 text-[22px]">
-            {account?.data?.expenses?.map((item, index) => (
+            {expenses?.map((item, index) => (
               <div className="min-h-[100px] w-full flex flex-col sm:flex-row gap-10 sm:gap-0 shadow-md border-gray-200 py-3 px-6 rounded-md bg-primary-50">
                 <div key={index} className="h-full flex-1 flex flex-col gap-6 ">
                   {/* ----------------- */}

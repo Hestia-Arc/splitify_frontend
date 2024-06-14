@@ -3,15 +3,26 @@ import { sectionLayout } from "../../utils/sections";
 import { FaPlus } from "react-icons/fa6";
 import { MdGroupAdd } from "react-icons/md";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllFriend } from "../../store/actions/friends/getAllFriend";
 
 const Friends = () => {
-  const { account } = useSelector((state) => state?.auth);
+  const { friends } = useSelector((state) => state?.friends);
+  const userID = localStorage.getItem("splitifyUser");
+  const parID = JSON.parse(userID);
+  const dispatch = useDispatch();
+
+  // console.log(parID.id)
+
+  // console.log(friends);
+  useEffect(() => {
+    dispatch(getAllFriend(parID.id));
+  }, []);
 
   return (
     <div className={sectionLayout}>
       {/* ===================== NO FRIENDS */}
-      {account?.data?.friends?.length === 0 ? (
+      {friends?.length === 0 ? (
         <div className="h-[400px] flex justify-center items-center">
           <div className="flex flex-col gap-4 items-center">
             <div className="text-center">
@@ -52,7 +63,7 @@ const Friends = () => {
 
           {/* ================ list */}
           <div className="flex flex-wrap gap-8  mt-8 text-[22px]">
-            {account?.data?.friends?.map((friend, index) => (
+            {friends.map((friend, index) => (
               <div
                 key={index}
                 className="flex flex-col gap-2 items-center justify-center"
@@ -63,7 +74,9 @@ const Friends = () => {
                   </div>
                 </div>
 
-                <p className="text-center text-[14px]  sm:text-[15px] ">{friend.name}</p>
+                <p className="text-center text-[14px]  sm:text-[15px] ">
+                  {friend.name}
+                </p>
               </div>
             ))}
           </div>
