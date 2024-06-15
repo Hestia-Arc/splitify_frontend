@@ -55,18 +55,19 @@ function SignUp() {
 
     // console.log(data);
     dispatch(signup({ data, callback: () => navigate("/login") }));
-    
   };
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
   return (
-    <div className="h-screen w-full relative flex bg-cool-white-100 overflow-y-auto  ">
- {/* ----- loader */}
- {loading && <StateLoader checkStatus={loading} />}
+    <div className="h-screen w-full bg-gradient-to-l from-gray-100 to-[#D977AF95] sm:bg-gradient-to-l sm:from-gray-100 sm:via-gray-200 sm:to-[#D977AF95]">
+
+    <div className="h-screen w-full relative flex overflow-y-auto mb-4 ">
+      {/* ----- loader */}
+      {loading && <StateLoader checkStatus={loading} />}
 
       {/* -------------------------- left */}
-      <div className=" h-fit flex-1 bg-[#D977AF] p-1 sm:p-0 ">
+      <div className=" h-fit flex-1 flex flex-col items-center p-1 sm:p-0 ">
         {/* logo */}
         <div className="w-full flex justify-center p-2">
           <img
@@ -77,7 +78,7 @@ function SignUp() {
         </div>
 
         {/* form */}
-        <div className=" bg-cool-white-100 h-[79%] flex flex-col items-center rounded-t-[30px] sm:rounded-tl-[80px] sm:rounded-tr-[0px] rou mt-2 py-4 pb-10   ">
+        <div className="w-[90%] h-fit sm:h-[79%] sm:w-[70%] bg-transparent border border-pink-300 border-opacity-50 flex flex-col items-center shadow-2xl drop-shadow-lg rounded-2xl  mt-2 py-4 pb-10 sm:py-8   ">
           <div className="text-subTitle font-bold ">Create an account</div>
 
           <form
@@ -177,10 +178,11 @@ function SignUp() {
       <div className=" hidden sm:flex w-2/5  justify-end ">
         <img
           src={groupImage}
-          className="h-[642px] w-[590px]"
+          className="h-[680px] w-[590px]"
           alt="group with phone"
         />
       </div>
+    </div>
     </div>
   );
 }

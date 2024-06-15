@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FaPowerOff, FaWallet, FaUserFriends } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import {
   MdDashboard,
   MdOutlineGroups,
@@ -12,10 +12,10 @@ import logo from "../assets/images/split-logo.png";
 import { logout } from "../store/actions/auth/logout";
 
 const Sidebar = ({isOpen, setIsOpen, toggleIsOpen}) => {
-  // const { isOpen } = useSelector((state) => state?.sidebar);
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
+const location = useLocation()
+
   const menuItem = [
     {
       name: "Overview",
@@ -39,9 +39,7 @@ const Sidebar = ({isOpen, setIsOpen, toggleIsOpen}) => {
       icon: <MdOutlineSettings className="w-8 h-8 " />,
     },
   ];
-  // const [isOpen, setIsOpen] = useState(false);
-  // const toggleIsOpen = () => setIsOpen(!isOpen);
-  // const toggleIsOpen = () => setIsOpen(!isOpen);
+ 
 
   return (
     <>
@@ -76,7 +74,7 @@ const Sidebar = ({isOpen, setIsOpen, toggleIsOpen}) => {
         {/* ========================px-3 py-2 LIST */}
         <div className=" h-[450px] flex flex-col gap-4 mt-10">
           {menuItem.map((item, index) => (
-            <Link
+            <NavLink
               className={`h-[48px] flex items-center ${
                 isOpen ? "justify-start" : "justify-center"
               }  gap-4 hover:bg-primary-50 hover:p-1 hover:font-extrabold rounded-md `}
@@ -96,7 +94,7 @@ const Sidebar = ({isOpen, setIsOpen, toggleIsOpen}) => {
                 {" "}
                 {item.name}
               </span>
-            </Link>
+            </NavLink>
           ))}
         </div>
         {/* ==================== LOGOUT */}
