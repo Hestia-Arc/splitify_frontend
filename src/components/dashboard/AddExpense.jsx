@@ -54,34 +54,51 @@ const AddExpense = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    if(friendList.length === 0 ){
-      toast.error("Please add a friend before creating an expense")
-    } else{
+    if (friendList.length === 0) {
+      toast.error("Please add a friend before creating an expense");
+      return;
+    }
 
-    let data = {
-      owner: parID.id,
-      title: formData.name,
-      description: "My new expense",
-      date: "",
-      amount: formData.amount,
-      currency: "",
-      category: formData.category || "Others",
-      members: friendList,
-      expenseType: "",
-    };
+    let amtPerMember = formData?.amount / (friendList.length + 1);
 
-    // console.log(data);
-    dispatch(createExpense({ data, callback: () => navigate("../expenses") }));
-  }
+    let shareToMembers = friendList.map((item) => ({
+      name: item,
+      share: amtPerMember,
+    }));
+    // console.log(amtPerMember)
+    // console.log(shareToMembers)
+    // console.log(fr)
+
+    // ----------------------
+
+    //   if(friendList.length === 0 ){
+    //     toast.error("Please add a friend before creating an expense")
+    //   } else{
+
+    //     // --------------------------
+      let data = {
+        owner: parID.id,
+        title: formData.name,
+        description: "My new expense",
+        date: "",
+        amount: formData.amount,
+        currency: "",
+        category: formData.category || "Others",
+        members: shareToMembers,
+        expenseType: "",
+      };
+
+      // console.log(data);
+      dispatch(createExpense({ data, callback: () => navigate("../expenses") }));
+    // }
   };
 
   return (
     <div className={`${sectionLayout} relative`}>
+      {/* ----- loader */}
+      {loading && <StateLoader checkStatus={loading} />}
 
-       {/* ----- loader */}
-       {loading && <StateLoader checkStatus={loading} />}
-
-       {/* --------------- */}
+      {/* --------------- */}
       <div className="flex items-center gap-2 mb-6">
         <Link
           to="../expenses"
@@ -133,7 +150,7 @@ const AddExpense = () => {
             required
             // className="mt-1 px-3 py-2 bg-white border shadow-sm border-primary-100  focus:outline-none focus:border-gray-900 focus:ring-gray-900 block w-full rounded-md sm:text-sm focus:ring-1"
           >
-            <option >Select a category</option>
+            <option>Select a category</option>
 
             <option value="Events">Events</option>
             <option value="Tours">Tours</option>
@@ -167,7 +184,7 @@ const AddExpense = () => {
 
         {/* --------------- choose friends */}
         <select
-        required
+          required
           name="members"
           id="members"
           className={`${inputStyle} w-[200px]`}

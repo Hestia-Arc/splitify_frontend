@@ -157,13 +157,13 @@ function DetailExpense() {
                 {/* -------- left */}
                 <div className="flex-1 h-full flex gap-2 items-center ">
                   <div className="w-[50px] min-h-[50px] sm:h-[50px] flex justify-center items-center font-extrabold uppercase rounded-full bg-slate-400">
-                    {item?.slice(0, 2)}
+                    {item?.name?.slice(0, 2)}
                   </div>
 
                   {/* ------- */}
                   <div className=" w-[140px] sm:w-full flex-1 flex ">
                     <div className="text-[15px] capitalize sm:text-[18px] text-gray-800 font-bold">
-                      {item}
+                      {item?.name ? item.name : <span className="text-[14px] lowercase">If this card is empty, please delete existing expense. Code has been updated.</span>}
                     </div>
                   </div>
                 </div>
@@ -172,7 +172,7 @@ function DetailExpense() {
                 <div className="flex-1 flex justify-end items-center gap-1 sm:gap-5 h-full">
                   <div className="flex flex-col items-end gap-1">
                     <div className=" text-[14px] sm:text-[18px] text-gray-800 font-bold">
-                      ₦{item?.amount}
+                      ₦{item?.share?.toLocaleString()}
                     </div>
                     {/* <div className="text-[15px] text-green">Paid</div> */}
                     <div className="text-[15px] text-rose-500">Pending</div>

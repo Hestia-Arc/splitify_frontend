@@ -240,7 +240,7 @@ const Overview = () => {
                             className="w-[30px] h-[30px] sm:w-[60px] sm:h-[60px] flex justify-center items-center bg-stone-600 bg-opacity-40 text-[#fff] text-[22px] shadow-lg rounded-full"
                             alt=""
                           >
-                            {img.slice(0, 1)}
+                            {img?.name?.slice(0, 1)}
                           </div>
                         </div>
                       ))}
