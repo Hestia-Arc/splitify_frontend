@@ -211,7 +211,7 @@ const AddExpense = () => {
         </select>
 
         {/* -----show friends */}
-        <div className="h-[100px] flex items-center gap-3 px-2 border">
+        <div className="h-[100px] flex items-center gap-3 px-2 border overflow-x-auto">
           {friendList?.map((item, index) => {
             return (
               <div className="text-center">

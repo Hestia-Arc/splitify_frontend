@@ -233,7 +233,7 @@ const Overview = () => {
 
                     {/* --------images */}
                     <div className="h-[80px] w-full flex items-center justify-center gap-3">
-                      {item?.members?.map((img, index) => (
+                      {item?.members?.slice(0,4)?.map((img, index) => (
                         <div className=" border border-gray-300 shadow rounded-full p-[3px]">
                           <div
                             key={index}
